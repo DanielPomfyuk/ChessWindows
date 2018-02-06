@@ -10,6 +10,7 @@ namespace App6.Models
 {
     class Bishop : Chess
     {
+        // This is bishop,not bi shop)
         public Bishop(FrameworkElement gridControlElement, Location position, Team colour, Grid playGround, PlayGround.HighLightHandler highLightHandler) : base(gridControlElement, position, colour, playGround, highLightHandler)
         {
         }
