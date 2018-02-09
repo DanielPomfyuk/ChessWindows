@@ -28,6 +28,7 @@ namespace App6.Models
             cells = new List<Models.Cell>();
             this.mainWindow = mainWindow;
         }
+        public static Grid playGround = new Grid();
         // changing cell`s colour to red(pressed mode) and back
         private void HighLightCell(object sender, RoutedEventArgs e, Location locationOfTheFigure, bool press = true)
         {
@@ -55,7 +56,7 @@ namespace App6.Models
         public void InitializeGrid()
         {
             //making a playground Grid
-            Grid playGround = new Grid();
+            
             playGround.Height = 630;
             playGround.Width = 630;
             //playGround.BorderBrush = new SolidColorBrush(Windows.UI.Colors.DarkOliveGreen); 
@@ -100,130 +101,45 @@ namespace App6.Models
             {
                 for (int j = 0; j < 8; j++)
                 {
-                    if (i == 1 || i == 6)
+                    if (i == 1)
                     {
-                        Image pawn = new Image();
-
-                        BitmapImage bmp = (i == 1) ? new BitmapImage(new Uri("ms-appx:///Assets/whitePawn.png")) : new BitmapImage(new Uri("ms-appx:///Assets/blackPawn.png"));
-                        pawn.Source = bmp;
-                        pawn.HorizontalAlignment = HorizontalAlignment.Center;
-                        pawn.VerticalAlignment = VerticalAlignment.Center;
-                        Chess.Team team = (i == 1) ? Chess.Team.white : Chess.Team.black;
-                        PlayGround.figures.Add(new Pawn(pawn, new Location() { row = i, column = j }, team, playGround, HighLightCell));
+                        Location location
+                        PlayGround.figures.Add(new Pawn(Models.Chess.Team.white, HighLightCell,));
                     }
                 }
             }
 
 
             // White king
-            Image queen = new Image();
-            BitmapImage bmw = new BitmapImage(new Uri("ms-appx:///Assets/whiteKing.png"));
-            queen.Source = bmw;
-            queen.HorizontalAlignment = HorizontalAlignment.Center;
-            queen.VerticalAlignment = VerticalAlignment.Center;
-            PlayGround.figures.Add(new King(queen, new Location() { row = 0, column = 4 }, Chess.Team.white, playGround, HighLightCell));
+            PlayGround.figures.Add(new King(Models.Chess.Team.white, HighLightCell));
             // Black king
-            queen = new Image();
-            bmw = new BitmapImage(new Uri("ms-appx:///Assets/blackKing.png"));
-            queen.Source = bmw;
-            queen.HorizontalAlignment = HorizontalAlignment.Center;
-            queen.VerticalAlignment = VerticalAlignment.Center;
-            PlayGround.figures.Add(new King(queen, new Location() { row = 7, column = 4 }, Chess.Team.black, playGround, HighLightCell));
+            PlayGround.figures.Add(new King(Models.Chess.Team.black, HighLightCell));
             // White queen
-            queen = new Image();
-            bmw = new BitmapImage(new Uri("ms-appx:///Assets/whiteQueenNew.png"));
-            queen.Source = bmw;
-            queen.HorizontalAlignment = HorizontalAlignment.Center;
-            queen.VerticalAlignment = VerticalAlignment.Center;
-            PlayGround.figures.Add(new Queen(queen, new Location() { row = 0, column = 3 }, Chess.Team.white, playGround, HighLightCell));
+            PlayGround.figures.Add(new Queen(Models.Chess.Team.white, HighLightCell));
             // Black queen
-            queen = new Image();
-            bmw = new BitmapImage(new Uri("ms-appx:///Assets/blackQueenNew.png"));
-            queen.Source = bmw;
-            queen.HorizontalAlignment = HorizontalAlignment.Center;
-            queen.VerticalAlignment = VerticalAlignment.Center;
-            PlayGround.figures.Add(new Queen(queen, new Location() { row = 7, column = 3 }, Chess.Team.black, playGround, HighLightCell));
+            PlayGround.figures.Add(new Queen(Models.Chess.Team.black, HighLightCell));
             // White bishops
-            queen = new Image();
-            bmw = new BitmapImage(new Uri("ms-appx:///Assets/whiteBishop.png"));
-            queen.Source = bmw;
-            queen.HorizontalAlignment = HorizontalAlignment.Center;
-            queen.VerticalAlignment = VerticalAlignment.Center;
-            PlayGround.figures.Add(new Bishop(queen, new Location() { row = 0, column = 2 }, Chess.Team.white, playGround, HighLightCell));
-            queen = new Image();
-            bmw = new BitmapImage(new Uri("ms-appx:///Assets/whiteBishop.png"));
-            queen.Source = bmw;
-            queen.HorizontalAlignment = HorizontalAlignment.Center;
-            queen.VerticalAlignment = VerticalAlignment.Center;
-            PlayGround.figures.Add(new Bishop(queen, new Location() { row = 0, column = 5 }, Chess.Team.white, playGround, HighLightCell));
+            PlayGround.figures.Add(new Bishop(Models.Chess.Team.white, HighLightCell));
+            PlayGround.figures.Add(new Bishop(Models.Chess.Team.white, HighLightCell));
             // Black bishops
-            queen = new Image();
-            bmw = new BitmapImage(new Uri("ms-appx:///Assets/blackBishop.png"));
-            queen.Source = bmw;
-            queen.HorizontalAlignment = HorizontalAlignment.Center;
-            queen.VerticalAlignment = VerticalAlignment.Center;
-            PlayGround.figures.Add(new Bishop(queen, new Location() { row = 7, column = 2 }, Chess.Team.black, playGround, HighLightCell));
-            queen = new Image();
-            bmw = new BitmapImage(new Uri("ms-appx:///Assets/blackBishop.png"));
-            queen.Source = bmw;
-            queen.HorizontalAlignment = HorizontalAlignment.Center;
-            queen.VerticalAlignment = VerticalAlignment.Center;
-            PlayGround.figures.Add(new Bishop(queen, new Location() { row = 7, column = 5 }, Chess.Team.black, playGround, HighLightCell));
-            // White knights
-            queen = new Image();
-            bmw = new BitmapImage(new Uri("ms-appx:///Assets/whiteKnight.png"));
-            queen.Source = bmw;
-            queen.HorizontalAlignment = HorizontalAlignment.Center;
-            queen.VerticalAlignment = VerticalAlignment.Center;
-            PlayGround.figures.Add(new Knight(queen, new Location() { row = 0, column = 1 }, Chess.Team.white, playGround, HighLightCell));
-            queen = new Image();
-            bmw = new BitmapImage(new Uri("ms-appx:///Assets/whiteKnight.png"));
-            queen.Source = bmw;
-            queen.HorizontalAlignment = HorizontalAlignment.Center;
-            queen.VerticalAlignment = VerticalAlignment.Center;
-            PlayGround.figures.Add(new Knight(queen, new Location() { row = 0, column = 6 }, Chess.Team.white, playGround, HighLightCell));
+            PlayGround.figures.Add(new Bishop(Models.Chess.Team.black, HighLightCell));
+            PlayGround.figures.Add(new Bishop(Models.Chess.Team.black, HighLightCell));
+            // White knights           
+            PlayGround.figures.Add(new Knight(Models.Chess.Team.white, HighLightCell));
+            PlayGround.figures.Add(new Knight(Models.Chess.Team.white, HighLightCell));
             // Black knights
-            queen = new Image();
-            bmw = new BitmapImage(new Uri("ms-appx:///Assets/blackKnight.png"));
-            queen.Source = bmw;
-            queen.HorizontalAlignment = HorizontalAlignment.Center;
-            queen.VerticalAlignment = VerticalAlignment.Center;
-            PlayGround.figures.Add(new Knight(queen, new Location() { row = 7, column = 1 }, Chess.Team.black, playGround, HighLightCell));
-            queen = new Image();
-            bmw = new BitmapImage(new Uri("ms-appx:///Assets/blackKnight.png"));
-            queen.Source = bmw;
-            queen.HorizontalAlignment = HorizontalAlignment.Center;
-            queen.VerticalAlignment = VerticalAlignment.Center;
-            PlayGround.figures.Add(new Knight(queen, new Location() { row = 7, column = 6 }, Chess.Team.black, playGround, HighLightCell));
+            PlayGround.figures.Add(new Knight(Models.Chess.Team.black, HighLightCell));
+            PlayGround.figures.Add(new Knight(Models.Chess.Team.black, HighLightCell));
             // White rooks
-            queen = new Image();
-            bmw = new BitmapImage(new Uri("ms-appx:///Assets/whiteRook.png"));
-            queen.Source = bmw;
-            queen.HorizontalAlignment = HorizontalAlignment.Center;
-            queen.VerticalAlignment = VerticalAlignment.Center;
-            PlayGround.figures.Add(new Rook(queen, new Location() { row = 0, column = 0 }, Chess.Team.white, playGround, HighLightCell));
-            queen = new Image();
-            bmw = new BitmapImage(new Uri("ms-appx:///Assets/whiteRook.png"));
-            queen.Source = bmw;
-            queen.HorizontalAlignment = HorizontalAlignment.Center;
-            queen.VerticalAlignment = VerticalAlignment.Center;
-            PlayGround.figures.Add(new Rook(queen, new Location() { row = 0, column = 7 }, Chess.Team.white, playGround, HighLightCell));
+            PlayGround.figures.Add(new Rook(Models.Chess.Team.white, HighLightCell));
+            PlayGround.figures.Add(new Rook(Models.Chess.Team.white, HighLightCell));
             // Black rooks
-            queen = new Image();
-            bmw = new BitmapImage(new Uri("ms-appx:///Assets/blackRook.png"));
-            queen.Source = bmw;
-            queen.HorizontalAlignment = HorizontalAlignment.Center;
-            queen.VerticalAlignment = VerticalAlignment.Center;
-            PlayGround.figures.Add(new Rook(queen, new Location() { row = 7, column = 0 }, Chess.Team.black, playGround, HighLightCell));
-            queen = new Image();
-            bmw = new BitmapImage(new Uri("ms-appx:///Assets/blackRook.png"));
-            queen.Source = bmw;
-            queen.HorizontalAlignment = HorizontalAlignment.Center;
-            queen.VerticalAlignment = VerticalAlignment.Center;
-            PlayGround.figures.Add(new Rook(queen, new Location() { row = 7, column = 7 }, Chess.Team.black, playGround, HighLightCell));
+            PlayGround.figures.Add(new Rook(Models.Chess.Team.black, HighLightCell));
+            PlayGround.figures.Add(new Rook(Models.Chess.Team.black, HighLightCell));
             foreach (Chess figure in figures)
             {
-                figure.Locate();
+                Viewes.PlayGround.Add(Models.PlayGround.playGround, figure);
+                Viewes.PlayGround.Locate(figure);
             }
             playGround.VerticalAlignment = VerticalAlignment.Center;
             playGround.HorizontalAlignment = HorizontalAlignment.Center;

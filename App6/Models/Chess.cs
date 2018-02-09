@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -31,20 +28,22 @@ namespace App6.Models
     }
     abstract class Chess
     {
+        public Chess(Team team, PlayGround.HighLightHandler highLightHandler)
+        {
+            this._team = team;
+            this.highlightHandler = highLightHandler;
+        }
         //constructor
-        public Chess(FrameworkElement gridControlElement, Location position, Team team, Grid playGround, PlayGround.HighLightHandler highLightHandler)
+        public Chess(FrameworkElement gridControlElement, Location position, Team team, PlayGround.HighLightHandler highLightHandler)
         {
             this.gridControlElement = gridControlElement;
             this._position = position;
             this._team = team;
-            this.playGround = playGround;
             this.highlightHandler = highLightHandler;
-            this.playGround.Children.Add(this.gridControlElement);
             this.gridControlElement.PointerPressed += this.MoveHandler;
         }
-        protected Grid playGround;
         private Location _position;
-        protected FrameworkElement gridControlElement;
+        public FrameworkElement gridControlElement;
         public PlayGround.HighLightHandler highlightHandler;
         public enum Team { white, black };
         private Team _team;
@@ -64,12 +63,6 @@ namespace App6.Models
         {
             Handlers.Chess.MoveHandler(sender, e, this);
         }
-        //adds fidurs to the board
-        public void Locate()
-        {
-            Grid.SetColumn(this.gridControlElement, this.position.column);
-            Grid.SetRow(this.gridControlElement, this.position.row);
-        }
         public virtual Location position
         {
             get
@@ -81,10 +74,7 @@ namespace App6.Models
                 this._position = value;
             }
         }
-        public void RemoveFromPlayGround()
-        {
-            playGround.Children.Remove(this.gridControlElement);
-        }
+
         private bool IsVerticallyMidle(Location destination, Location middleCandidate)
         {
             int max = destination.row > this.position.row ? destination.row : this.position.row;

@@ -19,14 +19,14 @@ namespace App6.Handlers
             {
                 if (PlayGround.currentMovingFigure is Models.King && Math.Abs(location.column - ((Models.King)(PlayGround.currentMovingFigure)).position.column) == 2)
                 {
-                    _PlayGround.Castling(sender,e,(Models.King)(PlayGround.currentMovingFigure), location,figures,MovingTeam,MovingTeamIndicator);
+                    PlayGroung.Castling(sender,e,(Models.King)(PlayGround.currentMovingFigure), location,figures,MovingTeam,MovingTeamIndicator);
                 }
                 // checking can the figure stand on current cell
                 else if (PlayGround.currentMovingFigure.IsTheMovePossible(location, PlayGround.figures))
                 {
                     // unreleasing figure`s cell and moving her to the new place
                     PlayGround.currentMovingFigure.highlightHandler(sender, e, PlayGround.currentMovingFigure.position, false);
-                    _PlayGround.Move(sender, e, location, Models.PlayGround.currentMovingFigure, Models.PlayGround.figures, ref Models.PlayGround.MovingTeam, Models.PlayGround.TeamMoving);
+                    PlayGroung.Move(sender, e, location, Models.PlayGround.currentMovingFigure, Models.PlayGround.figures, ref Models.PlayGround.MovingTeam, Models.PlayGround.TeamMoving);
                 }
                 // if move is not possible player will see a messege
                 else

@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace App6.Handlers
 {
-    class _PlayGround
+    class PlayGroung
     {
         public static void Move(object sendingFigure, RoutedEventArgs e, Models.Location location, Models.Chess currentMovingFigure,List<Models.Chess> figures, ref Models.Chess.Team MovingTeam, TextBlock TeamMovingIndicator)
         {
@@ -50,8 +50,8 @@ namespace App6.Handlers
                         king.highlightHandler(sendingFigure, e, king.position, false);
                         rook.position = new Location { column = rook.position.column - 2, row = rook.position.row };
                         king.position = new Location { column = king.position.column + 2, row = king.position.row };
-                        rook.Locate();
-                        king.Locate();
+                        Viewes.PlayGround.Locate(rook);
+                        Viewes.PlayGround.Locate(king);
                         MovingTeam = MovingTeam == Models.Chess.Team.white ? Models.Chess.Team.black : Models.Chess.Team.white;
                         Viewes.PlayGround.MovingTeamSwitcher(TeamMovingIndicator,MovingTeam.ToString());
                     }
@@ -64,8 +64,8 @@ namespace App6.Handlers
                     {
                         rook.position = new Location { column = rook.position.column + 3, row = rook.position.row };
                         king.position = new Location { column = king.position.column - 2, row = king.position.row };
-                        rook.Locate();
-                        king.Locate();
+                        Viewes.PlayGround.Locate(rook);
+                        Viewes.PlayGround.Locate(king);
                         MovingTeam = MovingTeam == Models.Chess.Team.white ? Models.Chess.Team.black : Models.Chess.Team.white;
                         Viewes.PlayGround.MovingTeamSwitcher(TeamMovingIndicator,MovingTeam.ToString());
                     }
@@ -87,11 +87,11 @@ namespace App6.Handlers
             if (enemy != null)
             {
                 figures.Remove(enemy);
-                enemy.RemoveFromPlayGround();
+                Viewes.PlayGround.Remove(Models.PlayGround.playGround,enemy);
             }
             //setting figures new position
             figure.position = newLocation;
-            figure.Locate();
+            Viewes.PlayGround.Locate(figure);
 
             //after the move MovingTeam and Label`s values should  be changed to  oposite team
             MovingTeam = MovingTeam == Models.Chess.Team.white ? Models.Chess.Team.black : Models.Chess.Team.white;

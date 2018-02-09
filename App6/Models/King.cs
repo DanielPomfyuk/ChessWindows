@@ -5,13 +5,33 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace App6.Models
 {
     class King : Chess
     {
         private bool _isItTheFirstMove = true;
-        public King(FrameworkElement gridControlElement, Location position, Team colour, Grid playGround, PlayGround.HighLightHandler highLightHandler) : base(gridControlElement, position, colour, playGround, highLightHandler)
+        public King(Team color, PlayGround.HighLightHandler highLightHandler) :base(color,highLightHandler)
+        {
+            Image king = new Image();
+            BitmapImage bmw;
+            if (color == Team.white)
+            {
+                this.position = new Location() { row = 0, column = 4 };
+                 bmw = new BitmapImage(new Uri("ms-appx:///Assets/whiteKing.png"));
+            }
+            else
+            {
+                this.position = new Location() { row = 7, column = 4 };
+                bmw = new BitmapImage(new Uri("ms-appx:///Assets/blackKing.png"));
+            }
+            king.Source = bmw;
+            king.HorizontalAlignment = HorizontalAlignment.Center;
+            king.VerticalAlignment = VerticalAlignment.Center;
+            this.gridControlElement = king;
+        }
+        public King(FrameworkElement gridControlElement, Location position, Team colour, PlayGround.HighLightHandler highLightHandler) : base(gridControlElement, position, colour, highLightHandler)
         {
         }
         public bool isItTheFirstMove

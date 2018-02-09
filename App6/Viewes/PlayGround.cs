@@ -24,5 +24,18 @@ namespace App6.Viewes
         {
             label.Text = newText;
         }
+        public static void Locate(Models.Chess figure)
+        {
+            Grid.SetColumn(figure.gridControlElement, figure.position.column);
+            Grid.SetRow(figure.gridControlElement, figure.position.row);
+        }
+        public static void Add(Grid playGround , Models.Chess figure)
+        {
+            playGround.Children.Add(figure.gridControlElement);
+        }
+        public static void Remove(Grid playGround, Models.Chess figure)
+        {
+            playGround.Children.Remove(figure.gridControlElement);
+        }
     }
 }

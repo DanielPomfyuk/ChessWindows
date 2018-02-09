@@ -10,22 +10,22 @@
     <PackageArchitecture>x86</PackageArchitecture>
     <PackageIdentityName>75deaaa3-17c4-430e-8bd5-9dfc611f3846</PackageIdentityName>
     <PackageIdentityPublisher>CN=danya</PackageIdentityPublisher>
-    <IntermediateOutputPath>C:\Users\danya\source\repos\App6\App6\obj\x86\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\ChessWindows\App6\obj\x86\Debug\</IntermediateOutputPath>
     <RemoteDeploymentType></RemoteDeploymentType>
     <PackageRegistrationPath></PackageRegistrationPath>
     <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
-    <LayoutDir>C:\Users\danya\source\repos\App6\App6\bin\x86\Debug\AppX</LayoutDir>
+    <LayoutDir>C:\ChessWindows\App6\bin\x86\Debug\AppX</LayoutDir>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="C:\Users\danya\source\repos\App6\App6\bin\x86\Debug\Core\AppxManifest.xml">
+    <AppXManifest Include="C:\ChessWindows\App6\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\bin\x86\Debug\App6.exe">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\bin\x86\Debug\App6.exe">
       <PackagePath>entrypoint\App6.exe</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\danya\.nuget\packages\microsoft.csharp\4.0.1\lib\netcore50\Microsoft.CSharp.dll">
@@ -370,104 +370,104 @@
     <AppxPackagedFile Include="C:\Users\danya\.nuget\packages\system.xml.xmlserializer\4.0.11\lib\netcore50\System.Xml.XmlSerializer.dll">
       <PackagePath>System.Xml.XmlSerializer.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\a.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\a.png">
       <PackagePath>Assets\a.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\aaaa.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\aaaa.png">
       <PackagePath>Assets\aaaa.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\blackBishop.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\blackBishop.png">
       <PackagePath>Assets\blackBishop.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\blackKing.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\blackKing.png">
       <PackagePath>Assets\blackKing.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\blackKnight.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\blackKnight.png">
       <PackagePath>Assets\blackKnight.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\blackPawn.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\blackPawn.png">
       <PackagePath>Assets\blackPawn.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\blackQueen.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\blackQueen.png">
       <PackagePath>Assets\blackQueen.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\blackQueenNew.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\blackQueenNew.png">
       <PackagePath>Assets\blackQueenNew.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\blackRook.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\blackRook.png">
       <PackagePath>Assets\blackRook.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\eeeeeeeeee.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\eeeeeeeeee.png">
       <PackagePath>Assets\eeeeeeeeee.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\pawn.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\pawn.png">
       <PackagePath>Assets\pawn.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\queenRed.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\queenRed.png">
       <PackagePath>Assets\queenRed.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\whiteBishop.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\whiteBishop.png">
       <PackagePath>Assets\whiteBishop.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\whiteKing.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\whiteKing.png">
       <PackagePath>Assets\whiteKing.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\whiteKnight.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\whiteKnight.png">
       <PackagePath>Assets\whiteKnight.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\whitePawn.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\whitePawn.png">
       <PackagePath>Assets\whitePawn.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\whiteQueen.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\whiteQueen.png">
       <PackagePath>Assets\whiteQueen.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\whiteQueenNew.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\whiteQueenNew.png">
       <PackagePath>Assets\whiteQueenNew.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\whiteRook.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\whiteRook.png">
       <PackagePath>Assets\whiteRook.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\LockScreenLogo.scale-200.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\SplashScreen.scale-200.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\Square150x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\Square44x44Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\StoreLogo.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\StoreLogo.png">
       <PackagePath>Assets\StoreLogo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Assets\Wide310x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\Properties\Default.rd.xml">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\bin\x86\Debug\App6.xr.xml">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\bin\x86\Debug\App6.xr.xml">
       <PackagePath>App6.xr.xml</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.15063.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\bin\x86\Debug\resources.pri">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\danya\source\repos\App6\App6\bin\x86\Debug\Core\App6.exe">
+    <AppxPackagedFile Include="C:\ChessWindows\App6\bin\x86\Debug\Core\App6.exe">
       <PackagePath>App6.exe</PackagePath>
     </AppxPackagedFile>
   </ItemGroup>

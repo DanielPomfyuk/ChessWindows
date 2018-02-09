@@ -5,12 +5,48 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace App6.Models
 {
     class Knight : Chess
     {
-        public Knight(FrameworkElement gridControlElement, Location position, Team colour, Grid playGround, PlayGround.HighLightHandler highLightHandler) : base(gridControlElement, position, colour, playGround, highLightHandler)
+        public Knight(Team color, PlayGround.HighLightHandler highLightHandler) :base(color,highLightHandler)
+        {
+            Image knight = new Image();
+            BitmapImage bmw;
+            if (color == Team.white)
+            {
+                var twin = Models.PlayGround.figures.Find(x => x.position == new Location() { row = 0, column = 1 });
+                if(twin == null)
+                {
+                    this.position = new Location() { row = 0, column = 1 };
+                }
+                else
+                {
+                    this.position = new Location() { row = 0, column = 6 };
+                }
+                bmw = new BitmapImage(new Uri("ms-appx:///Assets/whiteKnight.png"));
+            }
+            else
+            {
+                var twin = Models.PlayGround.figures.Find(x => x.position == new Location() { row = 7, column = 1 });
+                if (twin == null)
+                {
+                    this.position = new Location() { row = 7, column = 1 };
+                }
+                else
+                {
+                    this.position = new Location() { row = 7, column = 6 };
+                }
+                bmw = new BitmapImage(new Uri("ms-appx:///Assets/blackKnight.png"));
+            }
+            knight.Source = bmw;
+            knight.HorizontalAlignment = HorizontalAlignment.Center;
+            knight.VerticalAlignment = VerticalAlignment.Center;
+            this.gridControlElement = knight;
+        }
+        public Knight(FrameworkElement gridControlElement, Location position, Team colour, PlayGround.HighLightHandler highLightHandler) : base(gridControlElement, position, colour, highLightHandler)
         {
         }
         public override bool IsTheMovePossible(Location locationOfThePotentialCell, List<Chess> figures)

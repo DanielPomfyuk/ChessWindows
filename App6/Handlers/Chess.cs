@@ -31,7 +31,7 @@ namespace App6.Handlers
                 if (PlayGround.currentMovingFigure.IsTheMovePossible(figure.position, PlayGround.figures))
                 {
                     PlayGround.currentMovingFigure.highlightHandler(sender, e, PlayGround.currentMovingFigure.position, false);
-                    _PlayGround.Move(sender,e,position1,Models.PlayGround.currentMovingFigure,Models.PlayGround.figures,ref Models.PlayGround.MovingTeam,Models.PlayGround.TeamMoving);
+                    PlayGroung.Move(sender,e,position1,Models.PlayGround.currentMovingFigure,Models.PlayGround.figures,ref Models.PlayGround.MovingTeam,Models.PlayGround.TeamMoving);
                 }
                 else
                 {

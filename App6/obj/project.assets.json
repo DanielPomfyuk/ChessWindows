@@ -25734,11 +25734,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\danya\\source\\repos\\App6\\App6\\App6.csproj",
+      "projectUniqueName": "C:\\ChessWindows\\App6\\App6.csproj",
       "projectName": "App6",
-      "projectPath": "C:\\Users\\danya\\source\\repos\\App6\\App6\\App6.csproj",
+      "projectPath": "C:\\ChessWindows\\App6\\App6.csproj",
       "packagesPath": "C:\\Users\\danya\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\danya\\source\\repos\\App6\\App6\\obj\\",
+      "outputPath": "C:\\ChessWindows\\App6\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [

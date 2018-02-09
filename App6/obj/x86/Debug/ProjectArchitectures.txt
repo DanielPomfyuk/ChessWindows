@@ -1,1 +1,1 @@
-C:\Users\danya\source\repos\App6\App6\App6.csproj;x86
+C:\ChessWindows\App6\App6.csproj;x86

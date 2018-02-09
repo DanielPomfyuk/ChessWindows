@@ -1,4 +1,3 @@
-WinMetadata\Windows.winmd
 Assets\a.png
 Assets\aaaa.png
 Assets\blackBishop.png
@@ -27,3 +26,4 @@ Assets\whiteRook.png
 Assets\Wide310x150Logo.scale-200.png
 App6.xr.xml
 Properties\Default.rd.xml
+WinMetadata\Windows.winmd
