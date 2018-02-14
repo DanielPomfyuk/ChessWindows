@@ -10,7 +10,7 @@ using Windows.UI.Xaml.Media.Imaging;
 namespace App6.Models
 {
 
-    class Pawn : Chess
+    public class Pawn : Chess
     {
         private bool _isItTheFirstMove = true;
         public Pawn(Team color, PlayGround.HighLightHandler highLightHandler,Location location) :base(color,highLightHandler)
@@ -19,18 +19,19 @@ namespace App6.Models
             BitmapImage bmw;
             if (color == Team.white)
             {
-                this.position = location;
+                this._position = location;
                 bmw = new BitmapImage(new Uri("ms-appx:///Assets/whitePawn.png"));
             }
             else
             {
-                this.position = location;
+                this._position = location;
                 bmw = new BitmapImage(new Uri("ms-appx:///Assets/blackPawn.png"));
             }
             pawn.Source = bmw;
             pawn.HorizontalAlignment = HorizontalAlignment.Center;
             pawn.VerticalAlignment = VerticalAlignment.Center;
             this.gridControlElement = pawn;
+            this.gridControlElement.PointerPressed += this.MoveHandler;
         }
         public Pawn(FrameworkElement gridControlElement, Location position, Team colour, PlayGround.HighLightHandler highLightHandler) : base(gridControlElement, position, colour, highLightHandler)
         {

@@ -46,6 +46,7 @@ namespace App6.Models
             bishop.HorizontalAlignment = HorizontalAlignment.Center;
             bishop.VerticalAlignment = VerticalAlignment.Center;
             this.gridControlElement = bishop;
+            this.gridControlElement.PointerPressed += this.MoveHandler;
         }
         public Bishop(FrameworkElement gridControlElement, Location position, Team colour, PlayGround.HighLightHandler highLightHandler) : base(gridControlElement, position, colour, highLightHandler)
         {

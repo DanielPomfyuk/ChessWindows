@@ -18,18 +18,19 @@ namespace App6.Models
             BitmapImage bmw;
             if (color == Team.white)
             {
-                this.position = new Location() { row = 0, column = 4 };
+                 this._position = new Location() { row = 0, column = 4 };
                  bmw = new BitmapImage(new Uri("ms-appx:///Assets/whiteKing.png"));
             }
             else
             {
-                this.position = new Location() { row = 7, column = 4 };
+                this._position = new Location() { row = 7, column = 4 };
                 bmw = new BitmapImage(new Uri("ms-appx:///Assets/blackKing.png"));
             }
             king.Source = bmw;
             king.HorizontalAlignment = HorizontalAlignment.Center;
             king.VerticalAlignment = VerticalAlignment.Center;
             this.gridControlElement = king;
+            this.gridControlElement.PointerPressed += this.MoveHandler;
         }
         public King(FrameworkElement gridControlElement, Location position, Team colour, PlayGround.HighLightHandler highLightHandler) : base(gridControlElement, position, colour, highLightHandler)
         {

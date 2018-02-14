@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace App6.Models
 {
-    class PlayGround
+    public class PlayGround
     {
         public static Models.Chess currentMovingFigure = null;
         public delegate void HighLightHandler(object sender, RoutedEventArgs e, Location location, bool press = true);
@@ -103,8 +103,13 @@ namespace App6.Models
                 {
                     if (i == 1)
                     {
-                        Location location
-                        PlayGround.figures.Add(new Pawn(Models.Chess.Team.white, HighLightCell,));
+                        Location location = new Location() { column = j, row = i };
+                        PlayGround.figures.Add(new Pawn(Models.Chess.Team.white, HighLightCell,location));
+                    }
+                    else if( i == 6)
+                    {
+                        Location location = new Location() { column = j, row = i };
+                        PlayGround.figures.Add(new Pawn(Models.Chess.Team.black, HighLightCell, location));
                     }
                 }
             }

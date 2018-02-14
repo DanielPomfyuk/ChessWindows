@@ -40,11 +40,11 @@ namespace App6.Models
                 var twin = Models.PlayGround.figures.Find(x => x.position == new Location() { row = 0, column = 0 });
                 if (twin == null)
                 {
-                    this.position = new Location() { row = 0, column = 0 };
+                    this._position = new Location() { row = 0, column = 0 };
                 }
                 else
                 {
-                    this.position = new Location() { row = 0, column = 7 };
+                    this._position = new Location() { row = 0, column = 7 };
                 }
                 bmw = new BitmapImage(new Uri("ms-appx:///Assets/whiteRook.png"));
             }
@@ -53,11 +53,11 @@ namespace App6.Models
                 var twin = Models.PlayGround.figures.Find(x => x.position == new Location() { row = 7, column = 0 });
                 if (twin == null)
                 {
-                    this.position = new Location() { row = 7, column = 0 };
+                    this._position = new Location() { row = 7, column = 0 };
                 }
                 else
                 {
-                    this.position = new Location() { row = 7, column = 7 };
+                    this._position = new Location() { row = 7, column = 7 };
                 }
                 bmw = new BitmapImage(new Uri("ms-appx:///Assets/blackRook.png"));
             }
@@ -65,6 +65,7 @@ namespace App6.Models
             rook.HorizontalAlignment = HorizontalAlignment.Center;
             rook.VerticalAlignment = VerticalAlignment.Center;
             this.gridControlElement = rook;
+            this.gridControlElement.PointerPressed += this.MoveHandler;
         }
         public Rook(FrameworkElement gridControlElement, Team colour, PlayGround.HighLightHandler highLightHandler, Location position) : base(gridControlElement, position, colour, highLightHandler)
         {

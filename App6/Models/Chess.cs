@@ -26,7 +26,7 @@ namespace App6.Models
             return String.Format("The row is {0}, the column is {1}", this.row, this.column);
         }
     }
-    abstract class Chess
+    public abstract class Chess
     {
         public Chess(Team team, PlayGround.HighLightHandler highLightHandler)
         {
@@ -42,7 +42,7 @@ namespace App6.Models
             this.highlightHandler = highLightHandler;
             this.gridControlElement.PointerPressed += this.MoveHandler;
         }
-        private Location _position;
+        protected Location _position;
         public FrameworkElement gridControlElement;
         public PlayGround.HighLightHandler highlightHandler;
         public enum Team { white, black };
@@ -59,7 +59,7 @@ namespace App6.Models
             return (Chess)this.MemberwiseClone();
         }
         //handler for moving operations
-        private void MoveHandler(object sender, RoutedEventArgs e)
+        protected void MoveHandler(object sender, RoutedEventArgs e)
         {
             Handlers.Chess.MoveHandler(sender, e, this);
         }
