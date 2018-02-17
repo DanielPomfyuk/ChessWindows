@@ -9,39 +9,13 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace App6.Models
 {
-    class Knight : Chess
+    public class Knight : Chess
     {
-        public Knight(Team color, PlayGround.HighLightHandler highLightHandler) :base(color,highLightHandler)
+        public Knight(Team color, PlayGround.HighLightHandler highLightHandler,bool isLeft = false) :base(color,highLightHandler)
         {
             Image knight = new Image();
-            BitmapImage bmw;
-            if (color == Team.white)
-            {
-                var twin = Models.PlayGround.figures.Find(x => x.position == new Location() { row = 0, column = 1 });
-                if(twin == null)
-                {
-                    this.position = new Location() { row = 0, column = 1 };
-                }
-                else
-                {
-                    this.position = new Location() { row = 0, column = 6 };
-                }
-                bmw = new BitmapImage(new Uri("ms-appx:///Assets/whiteKnight.png"));
-            }
-            else
-            {
-                var twin = Models.PlayGround.figures.Find(x => x.position == new Location() { row = 7, column = 1 });
-                if (twin == null)
-                {
-                    this.position = new Location() { row = 7, column = 1 };
-                }
-                else
-                {
-                    this.position = new Location() { row = 7, column = 6 };
-                }
-                bmw = new BitmapImage(new Uri("ms-appx:///Assets/blackKnight.png"));
-            }
-            knight.Source = bmw;
+            this.position = new Location() { column = isLeft ? 1 : 6, row = color == Team.white ? 0 : 7 };
+            knight.Source = new BitmapImage(new Uri(color == Team.white ? "ms-appx:///Assets/whiteKnight.png" : "ms-appx:///Assets/blackKnight.png"));
             knight.HorizontalAlignment = HorizontalAlignment.Center;
             knight.VerticalAlignment = VerticalAlignment.Center;
             this.gridControlElement = knight;

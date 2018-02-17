@@ -104,9 +104,9 @@ namespace App6.Models
                     if (i == 1)
                     {
                         Location location = new Location() { column = j, row = i };
-                        PlayGround.figures.Add(new Pawn(Models.Chess.Team.white, HighLightCell,location));
+                        PlayGround.figures.Add(new Pawn(Models.Chess.Team.white, HighLightCell, location));
                     }
-                    else if( i == 6)
+                    else if (i == 6)
                     {
                         Location location = new Location() { column = j, row = i };
                         PlayGround.figures.Add(new Pawn(Models.Chess.Team.black, HighLightCell, location));
@@ -124,22 +124,22 @@ namespace App6.Models
             // Black queen
             PlayGround.figures.Add(new Queen(Models.Chess.Team.black, HighLightCell));
             // White bishops
-            PlayGround.figures.Add(new Bishop(Models.Chess.Team.white, HighLightCell));
+            PlayGround.figures.Add(new Bishop(Models.Chess.Team.white, HighLightCell,true));
             PlayGround.figures.Add(new Bishop(Models.Chess.Team.white, HighLightCell));
             // Black bishops
-            PlayGround.figures.Add(new Bishop(Models.Chess.Team.black, HighLightCell));
+            PlayGround.figures.Add(new Bishop(Models.Chess.Team.black, HighLightCell,true));
             PlayGround.figures.Add(new Bishop(Models.Chess.Team.black, HighLightCell));
             // White knights           
-            PlayGround.figures.Add(new Knight(Models.Chess.Team.white, HighLightCell));
+            PlayGround.figures.Add(new Knight(Models.Chess.Team.white, HighLightCell,true));
             PlayGround.figures.Add(new Knight(Models.Chess.Team.white, HighLightCell));
             // Black knights
-            PlayGround.figures.Add(new Knight(Models.Chess.Team.black, HighLightCell));
+            PlayGround.figures.Add(new Knight(Models.Chess.Team.black, HighLightCell,true));
             PlayGround.figures.Add(new Knight(Models.Chess.Team.black, HighLightCell));
             // White rooks
-            PlayGround.figures.Add(new Rook(Models.Chess.Team.white, HighLightCell));
+            PlayGround.figures.Add(new Rook(Models.Chess.Team.white, HighLightCell,true));
             PlayGround.figures.Add(new Rook(Models.Chess.Team.white, HighLightCell));
             // Black rooks
-            PlayGround.figures.Add(new Rook(Models.Chess.Team.black, HighLightCell));
+            PlayGround.figures.Add(new Rook(Models.Chess.Team.black, HighLightCell,true));
             PlayGround.figures.Add(new Rook(Models.Chess.Team.black, HighLightCell));
             foreach (Chess figure in figures)
             {

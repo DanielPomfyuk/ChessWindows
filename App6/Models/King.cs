@@ -9,24 +9,14 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace App6.Models
 {
-    class King : Chess
+    public class King : Chess
     {
         private bool _isItTheFirstMove = true;
-        public King(Team color, PlayGround.HighLightHandler highLightHandler) :base(color,highLightHandler)
+        public King(Team color, PlayGround.HighLightHandler highLightHandler) : base(color, highLightHandler)
         {
             Image king = new Image();
-            BitmapImage bmw;
-            if (color == Team.white)
-            {
-                 this._position = new Location() { row = 0, column = 4 };
-                 bmw = new BitmapImage(new Uri("ms-appx:///Assets/whiteKing.png"));
-            }
-            else
-            {
-                this._position = new Location() { row = 7, column = 4 };
-                bmw = new BitmapImage(new Uri("ms-appx:///Assets/blackKing.png"));
-            }
-            king.Source = bmw;
+            this._position = new Location() { row = color == Team.white ? 0 : 7, column = 4 };
+            king.Source = new BitmapImage(new Uri(color == Team.white ? "ms-appx:///Assets/whiteKing.png" : "ms-appx:///Assets/blackKing.png"));
             king.HorizontalAlignment = HorizontalAlignment.Center;
             king.VerticalAlignment = VerticalAlignment.Center;
             this.gridControlElement = king;

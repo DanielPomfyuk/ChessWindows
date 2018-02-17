@@ -31,13 +31,13 @@
     <AppXManifest Include="C:\ChessWindows\App6\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2018-02-08T17:45:24.149</Modified>
+      <Modified>2018-02-16T22:24:36.427</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\ChessWindows\App6\bin\x86\Debug\App6.exe">
       <PackagePath>entrypoint\App6.exe</PackagePath>
-      <Modified>2018-02-08T17:45:23.878</Modified>
+      <Modified>2018-02-16T22:24:36.177</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\danya\.nuget\packages\microsoft.csharp\4.0.1\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -620,11 +620,11 @@
     <AppxPackagedFile Include="C:\ChessWindows\App6\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2018-02-07T20:28:26.373</Modified>
+      <Modified>2018-02-16T20:40:59.221</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\ChessWindows\App6\bin\x86\Debug\Core\App6.exe">
       <PackagePath>App6.exe</PackagePath>
-      <Modified>2018-02-08T17:45:24.146</Modified>
+      <Modified>2018-02-16T22:24:36.423</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

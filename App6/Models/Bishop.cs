@@ -12,37 +12,11 @@ namespace App6.Models
     class Bishop : Chess
     {
         // This is bishop,not bi shop)
-        public Bishop(Team color, PlayGround.HighLightHandler highLightHandler) :base(color,highLightHandler)
+        public Bishop(Team color, PlayGround.HighLightHandler highLightHandler,bool isLeft = false) :base(color,highLightHandler)
         {
             Image bishop = new Image();
-            BitmapImage bmw;
-            if (color == Team.white)
-            {
-                var twin = Models.PlayGround.figures.Find(x => x.position == new Location() { row = 0, column = 2 });
-                if (twin == null)
-                {
-                    this.position = new Location() { row = 0, column = 2 };
-                }
-                else
-                {
-                    this.position = new Location() { row = 0, column = 5 };
-                }
-                bmw = new BitmapImage(new Uri("ms-appx:///Assets/whiteBishop.png"));
-            }
-            else
-            {
-                var twin = Models.PlayGround.figures.Find(x => x.position == new Location() { row = 7, column = 2 });
-                if (twin == null)
-                {
-                    this.position = new Location() { row = 7, column = 2 };
-                }
-                else
-                {
-                    this.position = new Location() { row = 7, column = 5 };
-                }
-                bmw = new BitmapImage(new Uri("ms-appx:///Assets/blackBishop.png"));
-            }
-            bishop.Source = bmw;
+            this.position = new Location() { column = isLeft ? 2 : 5, row = color == Team.white ? 0 : 7 };
+            bishop.Source = new BitmapImage(new Uri(color == Team.white ? "ms-appx:///Assets/whiteBishop.png" : "ms-appx:///Assets/blackBishop.png"));
             bishop.HorizontalAlignment = HorizontalAlignment.Center;
             bishop.VerticalAlignment = VerticalAlignment.Center;
             this.gridControlElement = bishop;

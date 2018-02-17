@@ -337,7 +337,6 @@ C:\ChessWindows\App6\bin\x86\Debug\System.Xml.ReaderWriter.dll
 C:\ChessWindows\App6\bin\x86\Debug\System.Xml.XDocument.dll
 C:\ChessWindows\App6\bin\x86\Debug\System.Xml.XmlDocument.dll
 C:\ChessWindows\App6\bin\x86\Debug\System.Xml.XmlSerializer.dll
-C:\ChessWindows\App6\obj\x86\Debug\App6.csprojResolveAssemblyReference.cache
 C:\ChessWindows\App6\obj\x86\Debug\App.g.i.cs
 C:\ChessWindows\App6\obj\x86\Debug\App.g.cs
 C:\ChessWindows\App6\obj\x86\Debug\MainPage.g.i.cs
@@ -428,3 +427,4 @@ C:\ChessWindows\App6\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\ChessWindows\App6\obj\x86\Debug\resources.en-us.resfiles
 C:\ChessWindows\App6\obj\x86\Debug\resources.en-us.resfiles.intermediate
 C:\ChessWindows\App6\obj\x86\Debug\ProjectArchitectures.txt
+C:\ChessWindows\App6\obj\x86\Debug\App6.csprojResolveAssemblyReference.cache
