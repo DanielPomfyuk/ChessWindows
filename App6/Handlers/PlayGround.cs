@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace App6.Handlers
 {
-    class PlayGroung
+    public class PlayGroung
     {
         public static void Move(object sendingFigure, RoutedEventArgs e, Models.Location location, Models.Chess currentMovingFigure,List<Models.Chess> figures, ref Models.Chess.Team MovingTeam, TextBlock TeamMovingIndicator)
         {
@@ -71,6 +71,61 @@ namespace App6.Handlers
                     }
                 }
 
+            }
+        }
+
+        public static void Click(object sender, RoutedEventArgs e, Models.Location location, List<Models.Chess> figures, ref Models.Chess.Team MovingTeam, TextBlock MovingTeamIndicator)
+        {
+            // checking is there any movin figure on the desk
+            if (PlayGround.currentMovingFigure != null)
+            {
+                if (PlayGround.currentMovingFigure is Models.King && Math.Abs(location.column - ((Models.King)(PlayGround.currentMovingFigure)).position.column) == 2)
+                {
+                    PlayGroung.Castling(sender, e, (Models.King)(PlayGround.currentMovingFigure), location, figures, MovingTeam, MovingTeamIndicator);
+                }
+                // checking can the figure stand on current cell
+                else if (PlayGround.currentMovingFigure.IsTheMovePossible(location, PlayGround.figures))
+                {
+                    // unreleasing figure`s cell and moving her to the new place
+                    PlayGround.currentMovingFigure.highlightHandler(sender, e, PlayGround.currentMovingFigure.position, false);
+                    PlayGroung.Move(sender, e, location, Models.PlayGround.currentMovingFigure, Models.PlayGround.figures, ref Models.PlayGround.MovingTeam, Models.PlayGround.TeamMoving);
+                }
+                // if move is not possible player will see a messege
+                else
+                {
+                    Viewes.PlayGround.MoveNotPossibleMessege();
+                }
+                // changing current moving figure`s value to null
+                PlayGround.currentMovingFigure.highlightHandler(sender, e, PlayGround.currentMovingFigure.position, false);
+                PlayGround.currentMovingFigure = null;
+            }
+        }
+        public static void MoveHandler(object sender, RoutedEventArgs e, Models.Chess figure)
+        {
+            if (PlayGround.currentMovingFigure == null)
+            {
+                if (figure.team == PlayGround.MovingTeam)
+                {
+                    PlayGround.currentMovingFigure = figure;
+                    figure.highlightHandler(sender, e, figure.position);
+                }
+            }
+            else
+            {
+                int y = Grid.GetColumn((FrameworkElement)sender);
+                int x = Grid.GetRow((FrameworkElement)sender);
+                Models.Location position1 = new Models.Location() { row = x, column = y };
+                if (PlayGround.currentMovingFigure.IsTheMovePossible(figure.position, PlayGround.figures))
+                {
+                    PlayGround.currentMovingFigure.highlightHandler(sender, e, PlayGround.currentMovingFigure.position, false);
+                    PlayGroung.Move(sender, e, position1, Models.PlayGround.currentMovingFigure, Models.PlayGround.figures, ref Models.PlayGround.MovingTeam, Models.PlayGround.TeamMoving);
+                }
+                else
+                {
+                    Viewes.PlayGround.MoveNotPossibleMessege();
+                }
+                figure.highlightHandler(sender, e, PlayGround.currentMovingFigure.position, false);
+                PlayGround.currentMovingFigure = null;
             }
         }
         public static void MoveFigure(Models.Chess figure, Location newLocation,List<Models.Chess> figures, ref Models.Chess.Team MovingTeam, TextBlock  TeamMovingIndicator)

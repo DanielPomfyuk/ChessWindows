@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace App6.Models
 {
-    class Bishop : Chess
+    public class Bishop : Chess
     {
         // This is bishop,not bi shop)
         public Bishop(Team color, PlayGround.HighLightHandler highLightHandler,bool isLeft = false) :base(color,highLightHandler)

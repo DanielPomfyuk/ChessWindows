@@ -61,7 +61,7 @@ namespace App6.Models
         //handler for moving operations
         protected void MoveHandler(object sender, RoutedEventArgs e)
         {
-            Handlers.Chess.MoveHandler(sender, e, this);
+            Handlers.PlayGroung.MoveHandler(sender, e, this);
         }
         public virtual Location position
         {

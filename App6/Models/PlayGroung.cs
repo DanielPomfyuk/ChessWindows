@@ -16,15 +16,24 @@ namespace App6.Models
 
         private Grid mainWindow;
         //collection of all figures on the desk
-        public static List<Chess> figures;
+        private static List<Chess> _figures;
+        public static List<Models.Chess> figures
+        {
+            get
+            {
+                return _figures;
+            }
+        }
         //collection of all cells on the desk
         private List<Models.Cell> cells;
         //shows which team is moving at the moment
         public static Chess.Team MovingTeam = Chess.Team.white;
+       
+
         //constructor
         public PlayGround(Grid mainWindow)
         {
-            figures = new List<Chess>();
+            _figures = new List<Chess>();
             cells = new List<Models.Cell>();
             this.mainWindow = mainWindow;
         }

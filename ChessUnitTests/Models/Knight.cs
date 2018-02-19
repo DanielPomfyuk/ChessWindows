@@ -45,5 +45,14 @@ namespace ChessUnitTests
             Assert.IsTrue(knight.IsTheMovePossible(new App6.Models.Location() { row = 3, column = 2 }, figures));
             Assert.IsTrue(knight.IsTheMovePossible(new App6.Models.Location() { row = 5, column = 2 }, figures));
         }
+        [UITestMethod]
+        public void MoveIsImpossibleKnight()
+        {
+            List<App6.Models.Chess> figures = new List<App6.Models.Chess>();
+            App6.Models.Knight knight = new App6.Models.Knight(App6.Models.Chess.Team.white, HighlightHandler, true);
+            knight.position = new App6.Models.Location() { row = 4, column = 4 };
+            figures.Add(knight);
+            Assert.IsFalse(knight.IsTheMovePossible(new App6.Models.Location() { row = 6, column = 1 }, figures));
+        }
     }
 }

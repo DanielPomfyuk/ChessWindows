@@ -10,34 +10,9 @@ using Windows.UI.Xaml.Media;
 
 namespace App6.Handlers
 {
-    class Cell
+    public class Cell
     {
-        public static void CellMove(object sender, RoutedEventArgs e, Models.Location location,List<Models.Chess> figures,ref Models.Chess.Team MovingTeam,TextBlock MovingTeamIndicator )
-        {
-            // checking is there any movin figure on the desk
-            if (PlayGround.currentMovingFigure != null)
-            {
-                if (PlayGround.currentMovingFigure is Models.King && Math.Abs(location.column - ((Models.King)(PlayGround.currentMovingFigure)).position.column) == 2)
-                {
-                    PlayGroung.Castling(sender,e,(Models.King)(PlayGround.currentMovingFigure), location,figures,MovingTeam,MovingTeamIndicator);
-                }
-                // checking can the figure stand on current cell
-                else if (PlayGround.currentMovingFigure.IsTheMovePossible(location, PlayGround.figures))
-                {
-                    // unreleasing figure`s cell and moving her to the new place
-                    PlayGround.currentMovingFigure.highlightHandler(sender, e, PlayGround.currentMovingFigure.position, false);
-                    PlayGroung.Move(sender, e, location, Models.PlayGround.currentMovingFigure, Models.PlayGround.figures, ref Models.PlayGround.MovingTeam, Models.PlayGround.TeamMoving);
-                }
-                // if move is not possible player will see a messege
-                else
-                {
-                    Viewes.PlayGround.MoveNotPossibleMessege();
-                }
-                // changing current moving figure`s value to null
-                PlayGround.currentMovingFigure.highlightHandler(sender, e, PlayGround.currentMovingFigure.position, false);
-                PlayGround.currentMovingFigure = null;
-            }
-        }        
+       
         public static void ChangeFocus(Models.Cell cell, bool focused = true)
         {
             //moving figure stands on current cell nothing will happen

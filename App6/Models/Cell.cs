@@ -11,7 +11,7 @@ using Windows.UI.Xaml.Shapes;
 
 namespace App6.Models
 {
-    class Cell
+    public class Cell
     {
         //constructor
         public Cell(Types types, Location location, Grid playGround)
@@ -37,7 +37,7 @@ namespace App6.Models
         //handler for cell`s pressed event
         private void CellMove(object sender, RoutedEventArgs e)
         {
-            Handlers.Cell.CellMove(sender, e, this.location,Models.PlayGround.figures,ref Models.PlayGround.MovingTeam,Models.PlayGround.TeamMoving);
+            Handlers.PlayGroung.Click(sender, e, this.location,Models.PlayGround.figures,ref Models.PlayGround.MovingTeam,Models.PlayGround.TeamMoving);
         }
         //handler for cell`s focused event
         private void CellFocused(object sender, RoutedEventArgs e)
