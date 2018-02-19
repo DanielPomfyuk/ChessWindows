@@ -1,1 +1,0 @@
-C:\ChessWindows\App6\App6.csproj;x86
