@@ -18,7 +18,7 @@ namespace App6.Handlers
             {
                 if (currentMovingFigure is Models.King && Math.Abs(location.column - (currentMovingFigure as King).position.column) == 2)
                 {
-                    Castling(sendingFigure,e,currentMovingFigure as King, location,figures,MovingTeam,TeamMovingIndicator);
+                    Castling(sendingFigure,e,currentMovingFigure as King, location,figures,ref MovingTeam,TeamMovingIndicator);
                 }
                 // checking can the figure stand on current cell
                 else if (currentMovingFigure.IsTheMovePossible(location, figures))
@@ -37,40 +37,38 @@ namespace App6.Handlers
                 currentMovingFigure = null;
             }
         }
-        public static void Castling(object sendingFigure, RoutedEventArgs e,King king, Location location,List<Models.Chess> figures,Models.Chess.Team MovingTeam, TextBlock TeamMovingIndicator)
+        public static void Castling(object sendingFigure, RoutedEventArgs e,King king, Location location,List<Models.Chess> figures,ref Models.Chess.Team MovingTeam, TextBlock TeamMovingIndicator)
         {
             if (king.isItTheFirstMove)
             {
-                if (location.column > king.position.column)
+                int rookOriginalColumn;
+                int rookFinalColumn;
+                int kingFinalColumn;
+                if(location.column > king.position.column)
                 {
+                    rookOriginalColumn = 7;
+                    rookFinalColumn = 5;
+                    kingFinalColumn = 6;
                     location.column--;
-                    var rook = figures.Find(x => x is Rook && x.position.column == 7 && x.team == king.team && ((Rook)(x)).isItTheFirstMove == true);
-                    if (rook != null && rook.IsTheMovePossible(location, figures))
-                    {
-                        king.highlightHandler(sendingFigure, e, king.position, false);
-                        rook.position = new Location { column = rook.position.column - 2, row = rook.position.row };
-                        king.position = new Location { column = king.position.column + 2, row = king.position.row };
-                        Viewes.PlayGround.Locate(rook);
-                        Viewes.PlayGround.Locate(king);
-                        MovingTeam = MovingTeam == Models.Chess.Team.white ? Models.Chess.Team.black : Models.Chess.Team.white;
-                        Viewes.PlayGround.MovingTeamSwitcher(TeamMovingIndicator,MovingTeam.ToString());
-                    }
                 }
                 else
                 {
+                    rookOriginalColumn = 0;
+                    rookFinalColumn = 3;
+                    kingFinalColumn = 2;
                     location.column++;
-                    var rook = PlayGround.figures.Find(x => x is Rook && x.position.column == 0 && x.team == king.team && ((Rook)(x)).isItTheFirstMove == true);
-                    if (rook != null && rook.IsTheMovePossible(location, figures))
-                    {
-                        rook.position = new Location { column = rook.position.column + 3, row = rook.position.row };
-                        king.position = new Location { column = king.position.column - 2, row = king.position.row };
-                        Viewes.PlayGround.Locate(rook);
-                        Viewes.PlayGround.Locate(king);
-                        MovingTeam = MovingTeam == Models.Chess.Team.white ? Models.Chess.Team.black : Models.Chess.Team.white;
-                        Viewes.PlayGround.MovingTeamSwitcher(TeamMovingIndicator,MovingTeam.ToString());
-                    }
                 }
-
+                var rook = figures.Find(x => x is Rook && x.position.column == rookOriginalColumn && x.team == king.team && ((Rook)(x)).isItTheFirstMove == true);
+                if (rook != null && rook.IsTheMovePossible(location, figures))
+                {
+                    king.highlightHandler(sendingFigure, e, king.position, false);
+                    rook.position = new Location { column = rookFinalColumn, row = rook.position.row };
+                    king.position = new Location { column = kingFinalColumn, row = king.position.row };
+                    Viewes.PlayGround.Locate(rook);
+                    Viewes.PlayGround.Locate(king);
+                    MovingTeam = MovingTeam == Models.Chess.Team.white ? Models.Chess.Team.black : Models.Chess.Team.white;
+                    Viewes.PlayGround.MovingTeamSwitcher(TeamMovingIndicator, MovingTeam.ToString());
+                }
             }
         }
 
@@ -81,14 +79,14 @@ namespace App6.Handlers
             {
                 if (PlayGround.currentMovingFigure is Models.King && Math.Abs(location.column - ((Models.King)(PlayGround.currentMovingFigure)).position.column) == 2)
                 {
-                    PlayGroung.Castling(sender, e, (Models.King)(PlayGround.currentMovingFigure), location, figures, MovingTeam, MovingTeamIndicator);
+                    PlayGroung.Castling(sender, e, (Models.King)(PlayGround.currentMovingFigure), location, figures,ref MovingTeam, MovingTeamIndicator);
                 }
                 // checking can the figure stand on current cell
-                else if (PlayGround.currentMovingFigure.IsTheMovePossible(location, PlayGround.figures))
+                else if (PlayGround.currentMovingFigure.IsTheMovePossible(location, figures))
                 {
                     // unreleasing figure`s cell and moving her to the new place
                     PlayGround.currentMovingFigure.highlightHandler(sender, e, PlayGround.currentMovingFigure.position, false);
-                    PlayGroung.Move(sender, e, location, Models.PlayGround.currentMovingFigure, Models.PlayGround.figures, ref Models.PlayGround.MovingTeam, Models.PlayGround.TeamMoving);
+                    PlayGroung.Move(sender, e, location, Models.PlayGround.currentMovingFigure, figures, ref Models.PlayGround.MovingTeam, Models.PlayGround.TeamMoving);
                 }
                 // if move is not possible player will see a messege
                 else
@@ -100,7 +98,7 @@ namespace App6.Handlers
                 PlayGround.currentMovingFigure = null;
             }
         }
-        public static void MoveHandler(object sender, RoutedEventArgs e, Models.Chess figure)
+        public static void MoveHandler(object sender, RoutedEventArgs e, Models.Chess figure,List<Models.Chess> figures)
         {
             if (PlayGround.currentMovingFigure == null)
             {
@@ -115,10 +113,10 @@ namespace App6.Handlers
                 int y = Grid.GetColumn((FrameworkElement)sender);
                 int x = Grid.GetRow((FrameworkElement)sender);
                 Models.Location position1 = new Models.Location() { row = x, column = y };
-                if (PlayGround.currentMovingFigure.IsTheMovePossible(figure.position, PlayGround.figures))
+                if (PlayGround.currentMovingFigure.IsTheMovePossible(figure.position, figures))
                 {
                     PlayGround.currentMovingFigure.highlightHandler(sender, e, PlayGround.currentMovingFigure.position, false);
-                    PlayGroung.Move(sender, e, position1, Models.PlayGround.currentMovingFigure, Models.PlayGround.figures, ref Models.PlayGround.MovingTeam, Models.PlayGround.TeamMoving);
+                    PlayGroung.Move(sender, e, position1, Models.PlayGround.currentMovingFigure, figures, ref Models.PlayGround.MovingTeam, Models.PlayGround.TeamMoving);
                 }
                 else
                 {
