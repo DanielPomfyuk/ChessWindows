@@ -19,7 +19,6 @@ namespace App6.Models
             queen.HorizontalAlignment = HorizontalAlignment.Center;
             queen.VerticalAlignment = VerticalAlignment.Center;
             this.gridControlElement = queen;
-            this.gridControlElement.PointerPressed += this.MoveHandler;
         }
         public Queen(FrameworkElement gridControlElement, Location position, Team colour, PlayGround.HighLightHandler highLightHandler) : base(gridControlElement, position, colour, highLightHandler)
         {

@@ -20,18 +20,13 @@ namespace App6.Models
             return !locationOne.Equals(locationTwo);
 
         }
-
-        public override string ToString()
-        {
-            return String.Format("The row is {0}, the column is {1}", this.row, this.column);
-        }
     }
     public abstract class Chess
     {
         public Chess(Team team, PlayGround.HighLightHandler highLightHandler)
         {
             this._team = team;
-            this.highlightHandler = highLightHandler;
+           this.highlightHandler = highLightHandler;
         }
         //constructor
         public Chess(FrameworkElement gridControlElement, Location position, Team team, PlayGround.HighLightHandler highLightHandler)
@@ -40,7 +35,6 @@ namespace App6.Models
             this._position = position;
             this._team = team;
             this.highlightHandler = highLightHandler;
-            this.gridControlElement.PointerPressed += this.MoveHandler;
         }
         protected Location _position;
         public FrameworkElement gridControlElement;
@@ -57,11 +51,6 @@ namespace App6.Models
         public Chess clone()
         {
             return (Chess)this.MemberwiseClone();
-        }
-        //handler for moving operations
-        protected void MoveHandler(object sender, RoutedEventArgs e)
-        {
-            Handlers.PlayGroung.MoveHandler(sender, e, this,PlayGround.figures);
         }
         public virtual Location position
         {

@@ -39,7 +39,6 @@ namespace App6.Models
             rook.HorizontalAlignment = HorizontalAlignment.Center;
             rook.VerticalAlignment = VerticalAlignment.Center;
             this.gridControlElement = rook;
-            this.gridControlElement.PointerPressed += this.MoveHandler;
         }
         public Rook(FrameworkElement gridControlElement, Team colour, PlayGround.HighLightHandler highLightHandler, Location position) : base(gridControlElement, position, colour, highLightHandler)
         {

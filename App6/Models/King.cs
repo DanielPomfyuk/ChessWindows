@@ -20,7 +20,6 @@ namespace App6.Models
             king.HorizontalAlignment = HorizontalAlignment.Center;
             king.VerticalAlignment = VerticalAlignment.Center;
             this.gridControlElement = king;
-            this.gridControlElement.PointerPressed += this.MoveHandler;
         }
         public King(FrameworkElement gridControlElement, Location position, Team colour, PlayGround.HighLightHandler highLightHandler) : base(gridControlElement, position, colour, highLightHandler)
         {

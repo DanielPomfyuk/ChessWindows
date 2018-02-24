@@ -31,7 +31,6 @@ namespace App6.Models
             pawn.HorizontalAlignment = HorizontalAlignment.Center;
             pawn.VerticalAlignment = VerticalAlignment.Center;
             this.gridControlElement = pawn;
-            this.gridControlElement.PointerPressed += this.MoveHandler;
         }
         public Pawn(FrameworkElement gridControlElement, Location position, Team colour, PlayGround.HighLightHandler highLightHandler) : base(gridControlElement, position, colour, highLightHandler)
         {

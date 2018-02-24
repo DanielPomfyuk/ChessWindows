@@ -19,7 +19,6 @@ namespace App6.Models
             knight.HorizontalAlignment = HorizontalAlignment.Center;
             knight.VerticalAlignment = VerticalAlignment.Center;
             this.gridControlElement = knight;
-            this.gridControlElement.PointerPressed += this.MoveHandler;
         }
         public Knight(FrameworkElement gridControlElement, Location position, Team colour, PlayGround.HighLightHandler highLightHandler) : base(gridControlElement, position, colour, highLightHandler)
         {

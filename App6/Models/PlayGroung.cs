@@ -82,6 +82,10 @@ namespace App6.Models
         {
             Handlers.Cell.Pressed(cells.Find(x => x.location == GetLocation(sender)));
         }
+        private void ChessMove(object sender , RoutedEventArgs e)
+        {
+            Handlers.PlayGroung.MoveHandler(sender, e, figures.Find(x => x.position == GetLocation(sender)), figures);
+        }
         public void InitializeEvents()
         {
             foreach(Cell cell in cells)
@@ -89,7 +93,10 @@ namespace App6.Models
                 cell.rectangle.PointerPressed += ClickCell;
                 cell.rectangle.PointerEntered += FocusCell;
                 cell.rectangle.PointerExited += DisFocusCell;
-                //cell.rectangle.PointerPressed += PressCell;
+            }
+            foreach(Chess figure in figures)
+            {
+                figure.gridControlElement.PointerPressed += ChessMove;
             }
         }
         // a label dispaying MovingTeam`s value
