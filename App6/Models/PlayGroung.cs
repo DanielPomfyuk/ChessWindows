@@ -13,6 +13,7 @@ namespace App6.Models
     {
         public static Models.Chess currentMovingFigure = null;
         public delegate void HighLightHandler(object sender, RoutedEventArgs e, Location location, bool press = true);
+        public enum Actions { pressed, inFocus};
 
         private Grid mainWindow;
         //collection of all figures on the desk
@@ -38,6 +39,11 @@ namespace App6.Models
             this.mainWindow = mainWindow;
         }
         public static Grid playGround = new Grid();
+        private Location GetLocation(object sender)
+        {
+            return new Location() { row = Grid.GetRow(sender as FrameworkElement), column = Grid.GetColumn(sender as FrameworkElement) };
+        }
+        
         // changing cell`s colour to red(pressed mode) and back
         private void HighLightCell(object sender, RoutedEventArgs e, Location locationOfTheFigure, bool press = true)
         {
@@ -58,6 +64,33 @@ namespace App6.Models
         public bool IsTheGameSolved()
         {
             return true;
+        }
+        //Models back
+        private void FocusCell(object sender, RoutedEventArgs e)
+        {
+            Handlers.Cell.ChangeFocus(cells.Find(x=>x.location == GetLocation(sender)));
+        }
+        private void ClickCell(object sender, RoutedEventArgs e)
+        {
+            Handlers.PlayGroung.Click(sender, e, GetLocation(sender), Models.PlayGround.figures, ref Models.PlayGround.MovingTeam, Models.PlayGround.TeamMoving);
+        }
+        private void DisFocusCell(object sender, RoutedEventArgs e)
+        {
+            Handlers.Cell.ChangeFocus(cells.Find(x => x.location == GetLocation(sender)), false);
+        }
+        private void PressCell(object sender, RoutedEventArgs e)
+        {
+            Handlers.Cell.Pressed(cells.Find(x => x.location == GetLocation(sender)));
+        }
+        public void InitializeEvents()
+        {
+            foreach(Cell cell in cells)
+            {
+                cell.rectangle.PointerPressed += ClickCell;
+                cell.rectangle.PointerEntered += FocusCell;
+                cell.rectangle.PointerExited += DisFocusCell;
+                //cell.rectangle.PointerPressed += PressCell;
+            }
         }
         // a label dispaying MovingTeam`s value
         public static TextBlock TeamMoving = new TextBlock();
@@ -99,9 +132,9 @@ namespace App6.Models
                     {
                         type = Models.Cell.Types.white;
                     }
-                    Models.Cell rectangle = new Models.Cell(type, new Location { row = i, column = j }, playGround);
+                    Models.Cell rectangle = new Models.Cell(type, new Location { row = i, column = j });
                     cells.Add(rectangle);
-                    rectangle.Locate();
+                    rectangle.Locate(playGround);
                 }
 
             }
@@ -157,6 +190,7 @@ namespace App6.Models
             }
             playGround.VerticalAlignment = VerticalAlignment.Center;
             playGround.HorizontalAlignment = HorizontalAlignment.Center;
+
         }
     }
 }
