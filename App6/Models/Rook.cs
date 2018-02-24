@@ -31,7 +31,7 @@ namespace App6.Models
                 base.position = value;
             }
         }
-        public Rook(Team color, PlayGround.HighLightHandler highLightHandler, bool isLeft = false) :base(color,highLightHandler)
+        public Rook(Team color, bool isLeft = false) :base(color)
         {
             Image rook = new Image();          
             this._position = new Location() { column = isLeft ? 0 : 7, row = color == Team.white ? 0 : 7 };
@@ -40,7 +40,7 @@ namespace App6.Models
             rook.VerticalAlignment = VerticalAlignment.Center;
             this.gridControlElement = rook;
         }
-        public Rook(FrameworkElement gridControlElement, Team colour, PlayGround.HighLightHandler highLightHandler, Location position) : base(gridControlElement, position, colour, highLightHandler)
+        public Rook(FrameworkElement gridControlElement, Team colour, Location position) : base(gridControlElement, position, colour)
         {
         }
 

@@ -23,22 +23,19 @@ namespace App6.Models
     }
     public abstract class Chess
     {
-        public Chess(Team team, PlayGround.HighLightHandler highLightHandler)
+        public Chess(Team team)
         {
             this._team = team;
-           this.highlightHandler = highLightHandler;
         }
         //constructor
-        public Chess(FrameworkElement gridControlElement, Location position, Team team, PlayGround.HighLightHandler highLightHandler)
+        public Chess(FrameworkElement gridControlElement, Location position, Team team)
         {
             this.gridControlElement = gridControlElement;
             this._position = position;
             this._team = team;
-            this.highlightHandler = highLightHandler;
         }
         protected Location _position;
         public FrameworkElement gridControlElement;
-        public PlayGround.HighLightHandler highlightHandler;
         public enum Team { white, black };
         private Team _team;
         public virtual Team team

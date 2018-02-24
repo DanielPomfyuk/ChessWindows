@@ -13,7 +13,7 @@ namespace App6.Models
     public class Pawn : Chess
     {
         private bool _isItTheFirstMove = true;
-        public Pawn(Team color, PlayGround.HighLightHandler highLightHandler,Location location) :base(color,highLightHandler)
+        public Pawn(Team color,Location location) :base(color)
         {
             Image pawn = new Image();
             BitmapImage bmw;
@@ -32,7 +32,7 @@ namespace App6.Models
             pawn.VerticalAlignment = VerticalAlignment.Center;
             this.gridControlElement = pawn;
         }
-        public Pawn(FrameworkElement gridControlElement, Location position, Team colour, PlayGround.HighLightHandler highLightHandler) : base(gridControlElement, position, colour, highLightHandler)
+        public Pawn(FrameworkElement gridControlElement, Location position, Team colour) : base(gridControlElement, position, colour)
         {
         }
         public bool isItTheFirstMove

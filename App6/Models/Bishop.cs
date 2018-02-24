@@ -12,7 +12,7 @@ namespace App6.Models
     public class Bishop : Chess
     {
         // This is bishop,not bi shop)
-        public Bishop(Team color, PlayGround.HighLightHandler highLightHandler,bool isLeft = false) :base(color,highLightHandler)
+        public Bishop(Team color, bool isLeft = false) :base(color)
         {
             Image bishop = new Image();
             this.position = new Location() { column = isLeft ? 2 : 5, row = color == Team.white ? 0 : 7 };
@@ -21,7 +21,7 @@ namespace App6.Models
             bishop.VerticalAlignment = VerticalAlignment.Center;
             this.gridControlElement = bishop;
         }
-        public Bishop(FrameworkElement gridControlElement, Location position, Team colour, PlayGround.HighLightHandler highLightHandler) : base(gridControlElement, position, colour, highLightHandler)
+        public Bishop(FrameworkElement gridControlElement, Location position, Team colour) : base(gridControlElement, position, colour)
         {
         }
         public override bool IsTheMovePossible(Location locationOfThePotentialCell, List<Chess> figures)
