@@ -13,11 +13,7 @@ namespace ChessUnitTests
     public class Queen
     {
         List<App6.Models.Chess> figures = new List<App6.Models.Chess>();
-        App6.Models.Queen queen = new App6.Models.Queen(App6.Models.Chess.Team.white, HighlightHandler);
-        private static void HighlightHandler(object sender, RoutedEventArgs e, App6.Models.Location location, bool press = true)
-        {
-
-        }
+        App6.Models.Queen queen = new App6.Models.Queen(App6.Models.Chess.Team.white);
         [UITestMethod]
         public void IsTheMovePossibleQueen()
         {

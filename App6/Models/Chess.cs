@@ -28,12 +28,7 @@ namespace App6.Models
             this._team = team;
         }
         //constructor
-        public Chess(FrameworkElement gridControlElement, Location position, Team team)
-        {
-            this.gridControlElement = gridControlElement;
-            this._position = position;
-            this._team = team;
-        }
+       
         protected Location _position;
         public FrameworkElement gridControlElement;
         public enum Team { white, black };
@@ -44,10 +39,6 @@ namespace App6.Models
             {
                 return this._team;
             }
-        }
-        public Chess clone()
-        {
-            return (Chess)this.MemberwiseClone();
         }
         public virtual Location position
         {
@@ -60,6 +51,17 @@ namespace App6.Models
                 this._position = value;
             }
         }
+        public Chess(FrameworkElement gridControlElement, Location position, Team team)
+        {
+            this.gridControlElement = gridControlElement;
+            this._position = position;
+            this._team = team;
+        }
+        public Chess clone()
+        {
+            return (Chess)this.MemberwiseClone();
+        }
+       
 
         private bool IsVerticallyMidle(Location destination, Location middleCandidate)
         {
