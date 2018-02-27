@@ -33,23 +33,6 @@ namespace App6.Models
         };
         public Location location;
 
-        //handler for cell`s focused event
-        private void CellFocused(object sender, RoutedEventArgs e)
-        {
-            Handlers.Cell.ChangeFocus(this);
-        }
-        //handler for cell`s disfocud event
-        private void CellDisFocused(object sender, RoutedEventArgs e)
-        {
-            Handlers.Cell.ChangeFocus(this, false);
-        }
-        //handler for cell`s pressed event
-        public void Pressed(object sender, RoutedEventArgs e)
-        {
-            Handlers.Cell.Pressed(this);
-        }
-
-
         //creates a rectangle which will represend a cell on the desk
         public void Locate(Grid playGround)
         {
