@@ -11,36 +11,22 @@ namespace App6.Models
 {
     public class PlayGround
     {
-        public  Models.Chess currentMovingFigure = null;
-        public enum Actions { pressed, inFocus};
-
         private Grid mainWindow;
+        private Grid playGround = new Grid();
+        private  Models.Chess currentMovingFigure = null;
         //collection of all figures on the desk
-        private static List<Chess> _figures;
-        public static List<Models.Chess> figures
-        {
-            get
-            {
-                return _figures;
-            }
-        }
+        private  List<Chess> figures;     
         //collection of all cells on the desk
         private List<Models.Cell> cells;
         //shows which team is moving at the moment
-        public  Chess.Team MovingTeam = Chess.Team.white;
+        private  Chess.Team MovingTeam = Chess.Team.white;
         //constructor
         public PlayGround(Grid mainWindow)
         {
-            _figures = new List<Chess>();
+            figures = new List<Chess>();
             cells = new List<Models.Cell>();
             this.mainWindow = mainWindow;
-        }
-        public  Grid playGround = new Grid();
-        private Location GetLocation(object sender)
-        {
-            return new Location() { row = Grid.GetRow(sender as FrameworkElement), column = Grid.GetColumn(sender as FrameworkElement) };
-        }
-        
+        }     
         // changing cell`s colour to red(pressed mode) and back
         private void HighLightCell(object sender, RoutedEventArgs e, Location locationOfTheFigure, bool press = true)
         {
@@ -57,10 +43,9 @@ namespace App6.Models
                 Viewes.Cell.ChangeColor(cell, cell.type);
             }
         }
-        // shows is the game solved or not
-        public bool IsTheGameSolved()
+        private Location GetLocation(object sender)
         {
-            return true;
+            return new Location() { row = Grid.GetRow(sender as FrameworkElement), column = Grid.GetColumn(sender as FrameworkElement) };
         }
         public void Move(object sendingFigure, RoutedEventArgs e, Models.Location location, Models.Chess currentMovingFigure, List<Models.Chess> figures, ref Models.Chess.Team MovingTeam, TextBlock TeamMovingIndicator)
         {
@@ -205,7 +190,7 @@ namespace App6.Models
         }
         private void ClickCell(object sender, RoutedEventArgs e)
         {
-            Click(sender, e, GetLocation(sender), Models.PlayGround.figures, ref MovingTeam, Models.PlayGround.TeamMoving);
+            Click(sender, e, GetLocation(sender), figures, ref MovingTeam, Models.PlayGround.TeamMoving);
         }
         private void DisFocusCell(object sender, RoutedEventArgs e)
         {
@@ -215,19 +200,7 @@ namespace App6.Models
         {
            MoveHandler(sender, e, figures.Find(x => x.position == GetLocation(sender)), figures);
         }
-        public void InitializeEvents()
-        {
-            foreach(Cell cell in cells)
-            {
-                cell.rectangle.PointerPressed += ClickCell;
-                cell.rectangle.PointerEntered += FocusCell;
-                cell.rectangle.PointerExited += DisFocusCell;
-            }
-            foreach(Chess figure in figures)
-            {
-                figure.gridControlElement.PointerPressed += ChessMove;
-            }
-        }
+       
         public  void MoveFigure(Models.Chess figure, Location newLocation, List<Models.Chess> figures, ref Models.Chess.Team MovingTeam, TextBlock TeamMovingIndicator)
         {
             //if the move will produce a check for figures team move will be canceled
@@ -255,13 +228,11 @@ namespace App6.Models
             {
                 if (IsItAMate(MovingTeam, figures))
                 {
-                    Windows.UI.Popups.MessageDialog lose = new Windows.UI.Popups.MessageDialog("You lost,{0}", MovingTeam.ToString());
-                    lose.ShowAsync();
+                    Viewes.PlayGround.LoseMessage(MovingTeam);
                 }
                 else
                 {
-                    Windows.UI.Popups.MessageDialog teamChecked = new Windows.UI.Popups.MessageDialog("Ops,you`re checked :(");
-                    teamChecked.ShowAsync();
+                    Viewes.PlayGround.CheckMessage();
                 }
             }
             Viewes.PlayGround.MovingTeamSwitcher(TeamMovingIndicator, MovingTeam.ToString());
@@ -321,6 +292,19 @@ namespace App6.Models
         }
         // a label dispaying MovingTeam`s value
         public static TextBlock TeamMoving = new TextBlock();
+        public void InitializeEvents()
+        {
+            foreach (Cell cell in cells)
+            {
+                cell.rectangle.PointerPressed += ClickCell;
+                cell.rectangle.PointerEntered += FocusCell;
+                cell.rectangle.PointerExited += DisFocusCell;
+            }
+            foreach (Chess figure in figures)
+            {
+                figure.gridControlElement.PointerPressed += ChessMove;
+            }
+        }
         // all processes which must be done during grid initialization
         public void InitializeGrid()
         {
@@ -372,43 +356,43 @@ namespace App6.Models
                     if (i == 1)
                     {
                         Location location = new Location() { column = j, row = i };
-                        PlayGround.figures.Add(new Pawn(Models.Chess.Team.white, location));
+                        figures.Add(new Pawn(Models.Chess.Team.white, location));
                     }
                     else if (i == 6)
                     {
                         Location location = new Location() { column = j, row = i };
-                        PlayGround.figures.Add(new Pawn(Models.Chess.Team.black, location));
+                        figures.Add(new Pawn(Models.Chess.Team.black, location));
                     }
                 }
             }
 
 
             // White king
-            PlayGround.figures.Add(new King(Models.Chess.Team.white));
+            figures.Add(new King(Models.Chess.Team.white));
             // Black king
-            PlayGround.figures.Add(new King(Models.Chess.Team.black));
+            figures.Add(new King(Models.Chess.Team.black));
             // White queen
-            PlayGround.figures.Add(new Queen(Models.Chess.Team.white));
+            figures.Add(new Queen(Models.Chess.Team.white));
             // Black queen
-            PlayGround.figures.Add(new Queen(Models.Chess.Team.black));
+            figures.Add(new Queen(Models.Chess.Team.black));
             // White bishops
-            PlayGround.figures.Add(new Bishop(Models.Chess.Team.white,true));
-            PlayGround.figures.Add(new Bishop(Models.Chess.Team.white));
+            figures.Add(new Bishop(Models.Chess.Team.white,true));
+            figures.Add(new Bishop(Models.Chess.Team.white));
             // Black bishops
-            PlayGround.figures.Add(new Bishop(Models.Chess.Team.black,true));
-            PlayGround.figures.Add(new Bishop(Models.Chess.Team.black));
+            figures.Add(new Bishop(Models.Chess.Team.black,true));
+            figures.Add(new Bishop(Models.Chess.Team.black));
             // White knights           
-            PlayGround.figures.Add(new Knight(Models.Chess.Team.white,true));
-            PlayGround.figures.Add(new Knight(Models.Chess.Team.white));
+            figures.Add(new Knight(Models.Chess.Team.white,true));
+            figures.Add(new Knight(Models.Chess.Team.white));
             // Black knights
-            PlayGround.figures.Add(new Knight(Models.Chess.Team.black,true));
-            PlayGround.figures.Add(new Knight(Models.Chess.Team.black));
+            figures.Add(new Knight(Models.Chess.Team.black,true));
+            figures.Add(new Knight(Models.Chess.Team.black));
             // White rooks
-            PlayGround.figures.Add(new Rook(Models.Chess.Team.white,true));
-            PlayGround.figures.Add(new Rook(Models.Chess.Team.white));
+            figures.Add(new Rook(Models.Chess.Team.white,true));
+            figures.Add(new Rook(Models.Chess.Team.white));
             // Black rooks
-            PlayGround.figures.Add(new Rook(Models.Chess.Team.black,true));
-            PlayGround.figures.Add(new Rook(Models.Chess.Team.black));
+            figures.Add(new Rook(Models.Chess.Team.black,true));
+            figures.Add(new Rook(Models.Chess.Team.black));
             foreach (Chess figure in figures)
             {
                 Viewes.PlayGround.Add(playGround, figure);

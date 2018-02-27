@@ -20,6 +20,16 @@ namespace App6.Viewes
             Windows.UI.Popups.MessageDialog checkmessege = new Windows.UI.Popups.MessageDialog("You have to protect your king");
             checkmessege.ShowAsync();
         }
+        public static void LoseMessage(Models.Chess.Team MovingTeam)
+        {
+            Windows.UI.Popups.MessageDialog lose = new Windows.UI.Popups.MessageDialog("You lost,{0}", MovingTeam.ToString());
+            lose.ShowAsync();
+        }
+        public static void CheckMessage()
+        {
+            Windows.UI.Popups.MessageDialog teamChecked = new Windows.UI.Popups.MessageDialog("Ops,you`re checked :(");
+            teamChecked.ShowAsync();
+        }
         public static void MovingTeamSwitcher(TextBlock label, string newText)
         {
             label.Text = newText;
