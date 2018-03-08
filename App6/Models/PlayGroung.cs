@@ -13,6 +13,8 @@ namespace App6.Models
     {
         private Grid mainWindow;
         private Grid playGround = new Grid();
+        // a label dispaying MovingTeam`s value
+        public static TextBlock TeamMoving = new TextBlock();
         private  Models.Chess currentMovingFigure = null;
         //collection of all figures on the desk
         private  List<Chess> figures;     
@@ -20,13 +22,23 @@ namespace App6.Models
         private List<Models.Cell> cells;
         //shows which team is moving at the moment
         private  Chess.Team MovingTeam = Chess.Team.white;
+
+        public int Height { get; set; }
+
         //constructor
         public PlayGround(Grid mainWindow)
         {
             figures = new List<Chess>();
             cells = new List<Models.Cell>();
             this.mainWindow = mainWindow;
-        }     
+        }
+
+        public PlayGround(Grid mainWindow, List<Models.Chess> figures, List<Models.Cell> cells)
+        {
+            this.figures = figures;
+            this.cells = cells;
+            this.mainWindow = mainWindow;
+        }
         // changing cell`s colour to red(pressed mode) and back
         private void HighLightCell(object sender, RoutedEventArgs e, Location locationOfTheFigure, bool press = true)
         {
@@ -290,8 +302,7 @@ namespace App6.Models
             }
             return true;
         }
-        // a label dispaying MovingTeam`s value
-        public static TextBlock TeamMoving = new TextBlock();
+       
         public void InitializeEvents()
         {
             foreach (Cell cell in cells)
@@ -346,7 +357,6 @@ namespace App6.Models
                     cells.Add(rectangle);
                     rectangle.Locate(playGround);
                 }
-
             }
             // adding all figures to the desk
             for (int i = 0; i < 8; i++)
