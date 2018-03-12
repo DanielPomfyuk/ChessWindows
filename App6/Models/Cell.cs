@@ -14,8 +14,10 @@ namespace App6.Models
     public class Cell
     {
         //constructor
-        public Cell(Types types, Location location)
+        public Cell(Types types, Location location,double width)
         {
+            this.rectangle = new Rectangle();
+            this.rectangle.Height = width;
             this.type = types;
             this.location = location;
         }
@@ -36,8 +38,7 @@ namespace App6.Models
         //creates a rectangle which will represend a cell on the desk
         public void Locate(Grid playGround)
         {
-            this.rectangle = new Rectangle();
-            this.rectangle.Height = 570 / 8;
+           
             this.rectangle.Width = rectangle.Height;
             this.rectangle.Fill = new SolidColorBrush(Cell.cellColors[this.type]);
             Grid.SetRow(rectangle, this.location.row);

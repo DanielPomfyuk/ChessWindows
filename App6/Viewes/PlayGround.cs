@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Shapes;
 
 namespace App6.Viewes
 {
@@ -30,9 +33,10 @@ namespace App6.Viewes
             Windows.UI.Popups.MessageDialog teamChecked = new Windows.UI.Popups.MessageDialog("Ops,you`re checked :(");
             teamChecked.ShowAsync();
         }
-        public static void MovingTeamSwitcher(TextBlock label, string newText)
+        public static void MovingTeamSwitcher(App6.Models.Chess.Team team)
         {
-            label.Text = newText;
+            Models.PlayGround.WhiteTeamIndicator.Stroke = team == Models.Chess.Team.white ? new SolidColorBrush(Colors.Black) : null;
+            Models.PlayGround.blackTeamIndicator.Stroke = team == Models.Chess.Team.black ? new SolidColorBrush(Colors.Black) : null;
         }
         public static void Locate(Models.Chess figure)
         {

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Xaml.Shapes;
 
 namespace App6.Models
 {
@@ -14,14 +17,18 @@ namespace App6.Models
         private Grid mainWindow;
         private Grid playGround = new Grid();
         // a label dispaying MovingTeam`s value
-        public static TextBlock TeamMoving = new TextBlock();
-        private  Models.Chess currentMovingFigure = null;
+        private RelativePanel panel = new RelativePanel();
+        private TextBlock whiteText = new TextBlock();
+        private TextBlock blackText = new TextBlock();
+        public static Rectangle WhiteTeamIndicator = new Rectangle();
+        public static Rectangle blackTeamIndicator = new Rectangle();
+        private Models.Chess currentMovingFigure = null;
         //collection of all figures on the desk
-        private  List<Chess> figures;     
+        private List<Chess> figures;
         //collection of all cells on the desk
         private List<Models.Cell> cells;
         //shows which team is moving at the moment
-        private  Chess.Team MovingTeam = Chess.Team.white;
+        private Chess.Team MovingTeam = Chess.Team.white;
 
         public int Height { get; set; }
 
@@ -59,21 +66,21 @@ namespace App6.Models
         {
             return new Location() { row = Grid.GetRow(sender as FrameworkElement), column = Grid.GetColumn(sender as FrameworkElement) };
         }
-        public void Move(object sendingFigure, RoutedEventArgs e, Models.Location location, Models.Chess currentMovingFigure, List<Models.Chess> figures, ref Models.Chess.Team MovingTeam, TextBlock TeamMovingIndicator)
+        public void Move(object sendingFigure, RoutedEventArgs e, Models.Location location, Models.Chess currentMovingFigure, List<Models.Chess> figures, ref Models.Chess.Team MovingTeam)
         {
             // checking is there any movin figure on the desk
             if (currentMovingFigure != null)
             {
                 if (currentMovingFigure is Models.King && Math.Abs(location.column - (currentMovingFigure as King).position.column) == 2)
                 {
-                    Castling(sendingFigure, e, currentMovingFigure as King, location, figures, ref MovingTeam, TeamMovingIndicator);
+                    Castling(sendingFigure, e, currentMovingFigure as King, location, figures, ref MovingTeam);
                 }
                 // checking can the figure stand on current cell
                 else if (currentMovingFigure.IsTheMovePossible(location, figures))
                 {
                     // unreleasing figure`s cell and moving her to the new place
                     HighLightCell(sendingFigure, e, currentMovingFigure.position, false);
-                    MoveFigure(currentMovingFigure, location, figures, ref MovingTeam, TeamMovingIndicator);
+                    MoveFigure(currentMovingFigure, location, figures, ref MovingTeam);
                 }
                 // if move is not possible player will see a messege
                 else
@@ -85,7 +92,7 @@ namespace App6.Models
                 currentMovingFigure = null;
             }
         }
-        public  void Castling(object sendingFigure, RoutedEventArgs e, King king, Location location, List<Models.Chess> figures, ref Models.Chess.Team MovingTeam, TextBlock TeamMovingIndicator)
+        public void Castling(object sendingFigure, RoutedEventArgs e, King king, Location location, List<Models.Chess> figures, ref Models.Chess.Team MovingTeam)
         {
             if (king.isItTheFirstMove)
             {
@@ -115,26 +122,26 @@ namespace App6.Models
                     Viewes.PlayGround.Locate(rook);
                     Viewes.PlayGround.Locate(king);
                     MovingTeam = MovingTeam == Models.Chess.Team.white ? Models.Chess.Team.black : Models.Chess.Team.white;
-                    Viewes.PlayGround.MovingTeamSwitcher(TeamMovingIndicator, MovingTeam.ToString());
+                    Viewes.PlayGround.MovingTeamSwitcher( MovingTeam);
                 }
             }
         }
 
-        public  void Click(object sender, RoutedEventArgs e, Location location, List<Models.Chess> figures, ref Chess.Team MovingTeam, TextBlock MovingTeamIndicator)
+        public void Click(object sender, RoutedEventArgs e, Location location, List<Models.Chess> figures, ref Chess.Team MovingTeam)
         {
             // checking is there any movin figure on the desk
             if (currentMovingFigure != null)
             {
                 if (currentMovingFigure is Models.King && Math.Abs(location.column - ((King)(currentMovingFigure)).position.column) == 2)
                 {
-                    Castling(sender, e, (King)(currentMovingFigure), location, figures, ref MovingTeam, MovingTeamIndicator);
+                    Castling(sender, e, (King)(currentMovingFigure), location, figures, ref MovingTeam);
                 }
                 // checking can the figure stand on current cell
                 else if (currentMovingFigure.IsTheMovePossible(location, figures))
                 {
                     // unreleasing figure`s cell and moving her to the new place
                     HighLightCell(sender, e, currentMovingFigure.position, false);
-                    Move(sender, e, location, currentMovingFigure, figures, ref MovingTeam, TeamMoving);
+                    Move(sender, e, location, currentMovingFigure, figures, ref MovingTeam);
                 }
                 // if move is not possible player will see a messege
                 else
@@ -147,7 +154,7 @@ namespace App6.Models
             }
         }
 
-        public  void MoveHandler(object sender, RoutedEventArgs e, Chess figure, List<Models.Chess> figures)
+        public void MoveHandler(object sender, RoutedEventArgs e, Chess figure, List<Models.Chess> figures)
         {
             if (currentMovingFigure == null)
             {
@@ -165,7 +172,7 @@ namespace App6.Models
                 if (currentMovingFigure.IsTheMovePossible(figure.position, figures))
                 {
                     HighLightCell(sender, e, currentMovingFigure.position, false);
-                    Move(sender, e, position1, currentMovingFigure, figures, ref MovingTeam, TeamMoving);
+                    Move(sender, e, position1, currentMovingFigure, figures, ref MovingTeam);
                 }
                 else
                 {
@@ -176,7 +183,7 @@ namespace App6.Models
             }
         }
         //Models back
-        public  void ChangeFocus(Models.Cell cell, bool focused = true)
+        public void ChangeFocus(Models.Cell cell, bool focused = true)
         {
             //moving figure stands on current cell nothing will happen
             if (currentMovingFigure != null && currentMovingFigure.position == cell.location)
@@ -198,22 +205,22 @@ namespace App6.Models
         }
         private void FocusCell(object sender, RoutedEventArgs e)
         {
-            ChangeFocus(cells.Find(x=>x.location == GetLocation(sender)));
+            ChangeFocus(cells.Find(x => x.location == GetLocation(sender)));
         }
         private void ClickCell(object sender, RoutedEventArgs e)
         {
-            Click(sender, e, GetLocation(sender), figures, ref MovingTeam, Models.PlayGround.TeamMoving);
+            Click(sender, e, GetLocation(sender), figures, ref MovingTeam);
         }
         private void DisFocusCell(object sender, RoutedEventArgs e)
         {
             ChangeFocus(cells.Find(x => x.location == GetLocation(sender)), false);
         }
-        private void ChessMove(object sender , RoutedEventArgs e)
+        private void ChessMove(object sender, RoutedEventArgs e)
         {
-           MoveHandler(sender, e, figures.Find(x => x.position == GetLocation(sender)), figures);
+            MoveHandler(sender, e, figures.Find(x => x.position == GetLocation(sender)), figures);
         }
-       
-        public  void MoveFigure(Models.Chess figure, Location newLocation, List<Models.Chess> figures, ref Models.Chess.Team MovingTeam, TextBlock TeamMovingIndicator)
+
+        public void MoveFigure(Models.Chess figure, Location newLocation, List<Models.Chess> figures, ref Models.Chess.Team MovingTeam)
         {
             //if the move will produce a check for figures team move will be canceled
             if (WillResultWithCheck(figure, newLocation, figures))
@@ -247,9 +254,9 @@ namespace App6.Models
                     Viewes.PlayGround.CheckMessage();
                 }
             }
-            Viewes.PlayGround.MovingTeamSwitcher(TeamMovingIndicator, MovingTeam.ToString());
+            Viewes.PlayGround.MovingTeamSwitcher(MovingTeam);
         }
-        private  bool IsATeamChecked(Models.Chess.Team team, List<Models.Chess> figures)
+        private bool IsATeamChecked(Models.Chess.Team team, List<Models.Chess> figures)
         {
             // finds team`s king
             Models.Chess king = figures.Find(x => x.team == team && x is King);
@@ -264,7 +271,7 @@ namespace App6.Models
             return false;
         }
         // checkes will current move produse cheack for team or not
-        private  bool WillResultWithCheck(Models.Chess movingFigure, Location destination, List<Models.Chess> figures)
+        private bool WillResultWithCheck(Models.Chess movingFigure, Location destination, List<Models.Chess> figures)
         {
             // simulating a clone list of figures collection with changing cordinates for moving figure
             List<Models.Chess> simulated = new List<Models.Chess>();
@@ -284,7 +291,7 @@ namespace App6.Models
             // checking if team with new location has check
             return IsATeamChecked(movingFigure.team, simulated);
         }
-        private  bool IsItAMate(Models.Chess.Team team, List<Models.Chess> figures)
+        private bool IsItAMate(Models.Chess.Team team, List<Models.Chess> figures)
         {
             foreach (Models.Chess figure in figures.FindAll(x => x.team == team))
             {
@@ -302,7 +309,7 @@ namespace App6.Models
             }
             return true;
         }
-       
+
         public void InitializeEvents()
         {
             foreach (Cell cell in cells)
@@ -317,29 +324,62 @@ namespace App6.Models
             }
         }
         // all processes which must be done during grid initialization
-        public void InitializeGrid()
+        public void FakeInitializeGrid()
         {
             //making a playground Grid           
-            playGround.Height = 630;
-            playGround.Width = 630;
-            //playGround.BorderBrush = new SolidColorBrush(Windows.UI.Colors.DarkOliveGreen); 
-            //playGround.BorderThickness = new Thickness(5);
-            //initializing label and adding it to the mainwindow
-            TeamMoving.Text = MovingTeam.ToString();
-            TeamMoving.TextAlignment = TextAlignment.Left;
-            TeamMoving.HorizontalAlignment = HorizontalAlignment.Left;
-            TeamMoving.VerticalAlignment = VerticalAlignment.Center;
-            this.mainWindow.Children.Add(TeamMoving);
+            InitialeGrid();
+            Button firstButton = new Button();
+            firstButton.BorderThickness = new Thickness(3);
+            firstButton.Content = "new game";
+            firstButton.Height = 50;
+            firstButton.Width = 100;
+            firstButton.Click += InitializeHandler;
+            mainWindow.Children.Add(firstButton);
+        }
+        public void InitializeHandler(object sender, RoutedEventArgs e)
+        {
+            RemoveFigures();
+            figures.Clear();
+            InitializeFigures();
+            InitializeEvents();
+        }
+        public void InitialeGrid()
+        {
+            playGround.Height = 640;
+            playGround.Width = 640;
+            panel.HorizontalAlignment = HorizontalAlignment.Right;
+            panel.VerticalAlignment = VerticalAlignment.Center;
+            WhiteTeamIndicator.VerticalAlignment = VerticalAlignment.Top;
+            blackTeamIndicator.VerticalAlignment = VerticalAlignment.Bottom;
+            WhiteTeamIndicator.Height = playGround.Height / 2;
+            blackTeamIndicator.Height = playGround.Height / 2;
+            blackTeamIndicator.Width = 100;
+            WhiteTeamIndicator.Width = 100;
+            whiteText.Text = "White Team";
+            blackText.Text = "Black Team";
+            whiteText.VerticalAlignment = VerticalAlignment.Top;
+            blackText.VerticalAlignment = VerticalAlignment.Bottom;
+            RelativePanel.SetAlignTopWith(whiteText, WhiteTeamIndicator);
+            RelativePanel.SetAlignHorizontalCenterWith(whiteText, WhiteTeamIndicator);
+            RelativePanel.SetAlignTopWith(blackText, blackTeamIndicator);
+            RelativePanel.SetAlignHorizontalCenterWith(blackText, blackTeamIndicator);
+            panel.Height = playGround.Height;
+            RelativePanel.SetAlignBottomWithPanel(blackTeamIndicator, true);
+            panel.Children.Add(blackTeamIndicator);
+            panel.Children.Add(WhiteTeamIndicator);
+            panel.Children.Add(whiteText);
+            panel.Children.Add(blackText);
+            this.mainWindow.Children.Add(panel);
             //adding playground grid to the mainwindow
             this.mainWindow.Children.Add(playGround);
             //a cycle which adds white and black cells to the playground,making it a chess desk
             for (int i = 0; i < 8; i++)
             {
                 RowDefinition row = new RowDefinition();
-                row.Height = new GridLength((playGround.Height) / 9);
+                row.Height = new GridLength((playGround.Height) / 8);
                 playGround.RowDefinitions.Add(row);
                 ColumnDefinition column = new ColumnDefinition();
-                column.Width = new GridLength((playGround.Height) / 9);
+                column.Width = new GridLength((playGround.Height) / 8);
                 playGround.ColumnDefinitions.Add(column);
                 //cell`s colour depends on it`s possition
                 for (int j = 0; j < 8; j++)
@@ -353,11 +393,24 @@ namespace App6.Models
                     {
                         type = Models.Cell.Types.white;
                     }
-                    Models.Cell rectangle = new Models.Cell(type, new Location { row = i, column = j });
+                    Models.Cell rectangle = new Models.Cell(type, new Location { row = i, column = j }, playGround.Width / 8);
                     cells.Add(rectangle);
                     rectangle.Locate(playGround);
                 }
             }
+
+        }
+        public void RemoveFigures()
+        {
+            foreach (Chess figure in figures)
+            {
+                playGround.Children.Remove(figure.gridControlElement);
+            }
+        }
+        public void InitializeFigures()
+        {
+            MovingTeam = Chess.Team.white;
+            Viewes.PlayGround.MovingTeamSwitcher(MovingTeam);
             // adding all figures to the desk
             for (int i = 0; i < 8; i++)
             {
@@ -375,8 +428,6 @@ namespace App6.Models
                     }
                 }
             }
-
-
             // White king
             figures.Add(new King(Models.Chess.Team.white));
             // Black king
@@ -386,32 +437,29 @@ namespace App6.Models
             // Black queen
             figures.Add(new Queen(Models.Chess.Team.black));
             // White bishops
-            figures.Add(new Bishop(Models.Chess.Team.white,true));
+            figures.Add(new Bishop(Models.Chess.Team.white, true));
             figures.Add(new Bishop(Models.Chess.Team.white));
             // Black bishops
-            figures.Add(new Bishop(Models.Chess.Team.black,true));
+            figures.Add(new Bishop(Models.Chess.Team.black, true));
             figures.Add(new Bishop(Models.Chess.Team.black));
             // White knights           
-            figures.Add(new Knight(Models.Chess.Team.white,true));
+            figures.Add(new Knight(Models.Chess.Team.white, true));
             figures.Add(new Knight(Models.Chess.Team.white));
             // Black knights
-            figures.Add(new Knight(Models.Chess.Team.black,true));
+            figures.Add(new Knight(Models.Chess.Team.black, true));
             figures.Add(new Knight(Models.Chess.Team.black));
             // White rooks
-            figures.Add(new Rook(Models.Chess.Team.white,true));
+            figures.Add(new Rook(Models.Chess.Team.white, true));
             figures.Add(new Rook(Models.Chess.Team.white));
             // Black rooks
-            figures.Add(new Rook(Models.Chess.Team.black,true));
+            figures.Add(new Rook(Models.Chess.Team.black, true));
             figures.Add(new Rook(Models.Chess.Team.black));
             foreach (Chess figure in figures)
             {
                 Viewes.PlayGround.Add(playGround, figure);
                 Viewes.PlayGround.Locate(figure);
             }
-            playGround.VerticalAlignment = VerticalAlignment.Center;
-            playGround.HorizontalAlignment = HorizontalAlignment.Center;
-
         }
     }
 }
-        
+       
