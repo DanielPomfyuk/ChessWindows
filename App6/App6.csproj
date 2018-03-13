@@ -120,11 +120,13 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="App6_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\121212.jpg" />
+    <Content Include="Assets\17-19.png" />
     <Content Include="Assets\a.png" />
     <Content Include="Assets\aaaa.png" />
+    <Content Include="Assets\aqua-blue-apple-mac.jpg" />
     <Content Include="Assets\blackBishop.png" />
     <Content Include="Assets\blackKing.png" />
     <Content Include="Assets\blackKnight.png" />
@@ -135,6 +137,7 @@
     <Content Include="Assets\eeeeeeeeee.png" />
     <Content Include="Assets\pawn.png" />
     <Content Include="Assets\queenRed.png" />
+    <Content Include="Assets\teamesBoards.png" />
     <Content Include="Assets\whiteBishop.png" />
     <Content Include="Assets\whiteKing.png" />
     <Content Include="Assets\whiteKnight.png" />
@@ -142,6 +145,7 @@
     <Content Include="Assets\whiteQueen.png" />
     <Content Include="Assets\whiteQueenNew.png" />
     <Content Include="Assets\whiteRook.png" />
+    <Content Include="Assets\wooden_board.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

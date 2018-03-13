@@ -17,7 +17,7 @@ namespace ChessUnitTests
         public void ISTheMovePossiblePawn()
         {
             List<App6.Models.Chess> figures = new List<App6.Models.Chess>();
-            App6.Models.Pawn pawn = new App6.Models.Pawn(App6.Models.Chess.Team.white, HighlightHandler, new App6.Models.Location() { row = 1, column = 3 });
+            App6.Models.Pawn pawn = new App6.Models.Pawn(App6.Models.Chess.Team.white, new App6.Models.Location() { row = 1, column = 3 });
             figures.Add(pawn);
             //First move to 1 row forward should be possible
             Assert.IsTrue(pawn.IsTheMovePossible(new App6.Models.Location() { row = 2, column = 3 }, figures));
@@ -35,12 +35,8 @@ namespace ChessUnitTests
             //Move diagonally without killing the enemy should not be allowed
             Assert.IsFalse(pawn.IsTheMovePossible(new App6.Models.Location() { row = 2, column = 5 }, figures));
             //Move diagonally with enemy on that cell should be allowed
-            figures.Add(new App6.Models.Pawn(App6.Models.Chess.Team.black, HighlightHandler, new App6.Models.Location() { row = 2, column = 5 }));
+            figures.Add(new App6.Models.Pawn(App6.Models.Chess.Team.black, new App6.Models.Location() { row = 2, column = 5 }));
             Assert.IsTrue(pawn.IsTheMovePossible(new App6.Models.Location() { row = 2, column = 5 }, figures));
-        }
-        private void HighlightHandler(object sender, RoutedEventArgs e, App6.Models.Location location, bool press = true)
-        {
-
         }
     }
     

@@ -11,7 +11,7 @@ namespace App6.Models
 {
     public class Knight : Chess
     {
-        public Knight(Team color, PlayGround.HighLightHandler highLightHandler,bool isLeft = false) :base(color,highLightHandler)
+        public Knight(Team color,bool isLeft = false) : base(color)
         {
             Image knight = new Image();
             this.position = new Location() { column = isLeft ? 1 : 6, row = color == Team.white ? 0 : 7 };
@@ -19,9 +19,8 @@ namespace App6.Models
             knight.HorizontalAlignment = HorizontalAlignment.Center;
             knight.VerticalAlignment = VerticalAlignment.Center;
             this.gridControlElement = knight;
-            this.gridControlElement.PointerPressed += this.MoveHandler;
         }
-        public Knight(FrameworkElement gridControlElement, Location position, Team colour, PlayGround.HighLightHandler highLightHandler) : base(gridControlElement, position, colour, highLightHandler)
+        public Knight(FrameworkElement gridControlElement, Location position, Team colour) : base(gridControlElement, position, colour)
         {
         }
         public override bool IsTheMovePossible(Location locationOfThePotentialCell, List<Chess> figures)

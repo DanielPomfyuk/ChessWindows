@@ -12,7 +12,7 @@ namespace App6.Models
     public class King : Chess
     {
         private bool _isItTheFirstMove = true;
-        public King(Team color, PlayGround.HighLightHandler highLightHandler) : base(color, highLightHandler)
+        public King(Team color) : base(color)
         {
             Image king = new Image();
             this._position = new Location() { row = color == Team.white ? 0 : 7, column = 4 };
@@ -20,9 +20,8 @@ namespace App6.Models
             king.HorizontalAlignment = HorizontalAlignment.Center;
             king.VerticalAlignment = VerticalAlignment.Center;
             this.gridControlElement = king;
-            this.gridControlElement.PointerPressed += this.MoveHandler;
         }
-        public King(FrameworkElement gridControlElement, Location position, Team colour, PlayGround.HighLightHandler highLightHandler) : base(gridControlElement, position, colour, highLightHandler)
+        public King(FrameworkElement gridControlElement, Location position, Team colour) : base(gridControlElement, position, colour)
         {
         }
         public bool isItTheFirstMove

@@ -20,31 +20,17 @@ namespace App6.Models
             return !locationOne.Equals(locationTwo);
 
         }
-
-        public override string ToString()
-        {
-            return String.Format("The row is {0}, the column is {1}", this.row, this.column);
-        }
     }
     public abstract class Chess
     {
-        public Chess(Team team, PlayGround.HighLightHandler highLightHandler)
+        public Chess(Team team)
         {
             this._team = team;
-            this.highlightHandler = highLightHandler;
         }
         //constructor
-        public Chess(FrameworkElement gridControlElement, Location position, Team team, PlayGround.HighLightHandler highLightHandler)
-        {
-            this.gridControlElement = gridControlElement;
-            this._position = position;
-            this._team = team;
-            this.highlightHandler = highLightHandler;
-            this.gridControlElement.PointerPressed += this.MoveHandler;
-        }
+       
         protected Location _position;
         public FrameworkElement gridControlElement;
-        public PlayGround.HighLightHandler highlightHandler;
         public enum Team { white, black };
         private Team _team;
         public virtual Team team
@@ -53,15 +39,6 @@ namespace App6.Models
             {
                 return this._team;
             }
-        }
-        public Chess clone()
-        {
-            return (Chess)this.MemberwiseClone();
-        }
-        //handler for moving operations
-        protected void MoveHandler(object sender, RoutedEventArgs e)
-        {
-            Handlers.PlayGroung.MoveHandler(sender, e, this,PlayGround.figures);
         }
         public virtual Location position
         {
@@ -74,6 +51,17 @@ namespace App6.Models
                 this._position = value;
             }
         }
+        public Chess(FrameworkElement gridControlElement, Location position, Team team)
+        {
+            this.gridControlElement = gridControlElement;
+            this._position = position;
+            this._team = team;
+        }
+        public Chess clone()
+        {
+            return (Chess)this.MemberwiseClone();
+        }
+       
 
         private bool IsVerticallyMidle(Location destination, Location middleCandidate)
         {

@@ -12,11 +12,7 @@ namespace ChessUnitTests
     [TestClass]
     public class ChessPublicMethods
     {
-        public static void HighlightHandler(object sender, RoutedEventArgs e, App6.Models.Location location, bool press = true)
-        {
-
-        }
-        App6.Models.Queen queen = new App6.Models.Queen(Chess.Team.black, HighlightHandler);
+        App6.Models.Queen queen = new App6.Models.Queen(Chess.Team.black);
         [UITestMethod]
         public void Clone()
         {
@@ -56,5 +52,6 @@ namespace ChessUnitTests
             Assert.IsTrue(new Location() { row = 0, column = 2 } != new Location() { row = 0, column = 0 });
             Assert.IsFalse(new Location() { row = 0, column = 2 } == new Location() { row = 0, column = 0 });
         }
+
     }
 }

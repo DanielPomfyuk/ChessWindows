@@ -12,15 +12,11 @@ namespace ChessUnitTests
     [TestClass]
     public class Knight
     {
-        private static void HighlightHandler(object sender, RoutedEventArgs e, App6.Models.Location location, bool press = true)
-        {
-
-        }
         [UITestMethod]
         public void IsTheMovePossibleKnight()
         {
             List<App6.Models.Chess> figures = new List<App6.Models.Chess>();
-            App6.Models.Knight knight = new App6.Models.Knight(App6.Models.Chess.Team.white, HighlightHandler, true);
+            App6.Models.Knight knight = new App6.Models.Knight(App6.Models.Chess.Team.white, true);
             knight.position = new App6.Models.Location() { row = 4, column = 4 };
             figures.Add(knight);
             //if move is two cells front/back and one right/left move should be allowed
@@ -49,7 +45,7 @@ namespace ChessUnitTests
         public void MoveIsImpossibleKnight()
         {
             List<App6.Models.Chess> figures = new List<App6.Models.Chess>();
-            App6.Models.Knight knight = new App6.Models.Knight(App6.Models.Chess.Team.white, HighlightHandler, true);
+            App6.Models.Knight knight = new App6.Models.Knight(App6.Models.Chess.Team.white, true);
             knight.position = new App6.Models.Location() { row = 4, column = 4 };
             figures.Add(knight);
             Assert.IsFalse(knight.IsTheMovePossible(new App6.Models.Location() { row = 6, column = 1 }, figures));

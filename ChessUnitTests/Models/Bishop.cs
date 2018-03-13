@@ -12,15 +12,11 @@ namespace ChessUnitTests
     [TestClass]
     public class Bishop
     {
-        private static void HighlightHandler(object sender, RoutedEventArgs e, App6.Models.Location location, bool press = true)
-        {
-
-        }
         [UITestMethod]
         public void IsTheMovePossibleBishop()
         {
             List<App6.Models.Chess> figures = new List<App6.Models.Chess>();
-            App6.Models.Bishop bishop = new App6.Models.Bishop(App6.Models.Chess.Team.white, HighlightHandler, true);
+            App6.Models.Bishop bishop = new App6.Models.Bishop(App6.Models.Chess.Team.white, true);
             figures.Add(bishop);
             //bishop can go anywhere diagonally
             bishop.position = new App6.Models.Location() { row = 4, column = 4 };
@@ -33,7 +29,7 @@ namespace ChessUnitTests
         public void MoveIsImpossibleBishop()
         {
             List<App6.Models.Chess> figures = new List<App6.Models.Chess>();
-            App6.Models.Bishop bishop = new App6.Models.Bishop(App6.Models.Chess.Team.white, HighlightHandler, true);
+            App6.Models.Bishop bishop = new App6.Models.Bishop(App6.Models.Chess.Team.white, true);
             figures.Add(bishop);
             //bishop can`t make a move if destination is not on diagonal line with him 
             bishop.position = new App6.Models.Location() { row = 4, column = 4 };

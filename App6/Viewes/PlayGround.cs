@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Shapes;
 
 namespace App6.Viewes
 {
@@ -20,9 +23,20 @@ namespace App6.Viewes
             Windows.UI.Popups.MessageDialog checkmessege = new Windows.UI.Popups.MessageDialog("You have to protect your king");
             checkmessege.ShowAsync();
         }
-        public static void MovingTeamSwitcher(TextBlock label, string newText)
+        public static void LoseMessage(Models.Chess.Team MovingTeam)
         {
-            label.Text = newText;
+            Windows.UI.Popups.MessageDialog lose = new Windows.UI.Popups.MessageDialog("You lost,{0}", MovingTeam.ToString());
+            lose.ShowAsync();
+        }
+        public static void CheckMessage()
+        {
+            Windows.UI.Popups.MessageDialog teamChecked = new Windows.UI.Popups.MessageDialog("Ops,you`re checked :(");
+            teamChecked.ShowAsync();
+        }
+        public static void MovingTeamSwitcher(App6.Models.Chess.Team team,Rectangle whiteTeamIndicator, Rectangle blackTeamIndicator)
+        {
+            whiteTeamIndicator.Stroke = team == Models.Chess.Team.white ? new SolidColorBrush(Colors.White) : null;
+            blackTeamIndicator.Stroke = team == Models.Chess.Team.black ? new SolidColorBrush(Colors.White) : null;
         }
         public static void Locate(Models.Chess figure)
         {

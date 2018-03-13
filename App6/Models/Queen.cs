@@ -11,7 +11,7 @@ namespace App6.Models
 {
     public class Queen : Chess
     {
-        public Queen(Team color, PlayGround.HighLightHandler highLightHandler) :base(color,highLightHandler)
+        public Queen(Team color) :base(color)
         {
             Image queen = new Image();
             this._position = new Location() { row = color == Team.white ? 0 : 7, column = 3 };
@@ -19,9 +19,8 @@ namespace App6.Models
             queen.HorizontalAlignment = HorizontalAlignment.Center;
             queen.VerticalAlignment = VerticalAlignment.Center;
             this.gridControlElement = queen;
-            this.gridControlElement.PointerPressed += this.MoveHandler;
         }
-        public Queen(FrameworkElement gridControlElement, Location position, Team colour, PlayGround.HighLightHandler highLightHandler) : base(gridControlElement, position, colour, highLightHandler)
+        public Queen(FrameworkElement gridControlElement, Location position, Team colour) : base(gridControlElement, position, colour)
         {
         }
         public override bool IsTheMovePossible(Location locationOfThePotentialCell, List<Chess> figures)

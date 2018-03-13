@@ -14,13 +14,13 @@ namespace App6.Models
     public class Cell
     {
         //constructor
-        public Cell(Types types, Location location, Grid playGround)
+        public Cell(Types types, Location location,double width)
         {
+            this.rectangle = new Rectangle();
+            this.rectangle.Height = width;
             this.type = types;
             this.location = location;
-            this.playGround = playGround;
         }
-        private Grid playGround;
         public Rectangle rectangle;
         public Types type;
         //an enum of all types of cell`s possible in the game
@@ -34,43 +34,16 @@ namespace App6.Models
             {Types.pressed, Colors.Red }
         };
         public Location location;
-        //handler for cell`s pressed event
-        private void CellMove(object sender, RoutedEventArgs e)
-        {
-            Handlers.PlayGroung.Click(sender, e, this.location,Models.PlayGround.figures,ref Models.PlayGround.MovingTeam,Models.PlayGround.TeamMoving);
-        }
-        //handler for cell`s focused event
-        private void CellFocused(object sender, RoutedEventArgs e)
-        {
-            Handlers.Cell.ChangeFocus(this);
-
-        }
-        //handler for cell`s disfocud event
-        private void CellDisFocused(object sender, RoutedEventArgs e)
-        {
-            Handlers.Cell.ChangeFocus(this, false);
-        }
-        //handler for cell`s pressed event
-        public void Pressed(object sender, RoutedEventArgs e)
-        {
-            Handlers.Cell.Pressed(this);
-        }
-
 
         //creates a rectangle which will represend a cell on the desk
-        public void Locate()
+        public void Locate(Grid playGround)
         {
-            this.rectangle = new Rectangle();
-            this.rectangle.Height = 570 / 8;
+           
             this.rectangle.Width = rectangle.Height;
             this.rectangle.Fill = new SolidColorBrush(Cell.cellColors[this.type]);
             Grid.SetRow(rectangle, this.location.row);
             Grid.SetColumn(rectangle, this.location.column);
             playGround.Children.Add(this.rectangle);
-            this.rectangle.PointerPressed += this.CellMove;
-            this.rectangle.PointerEntered += this.CellFocused;
-            this.rectangle.PointerExited += this.CellDisFocused;
-            this.rectangle.PointerPressed += this.Pressed;
         }
     }
 }
