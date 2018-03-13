@@ -20,8 +20,8 @@ namespace App6.Models
         private RelativePanel panel = new RelativePanel();
         private TextBlock whiteText = new TextBlock();
         private TextBlock blackText = new TextBlock();
-        public static Rectangle WhiteTeamIndicator = new Rectangle();
-        public static Rectangle blackTeamIndicator = new Rectangle();
+        private Rectangle whiteTeamIndicator = new Rectangle();
+        private Rectangle blackTeamIndicator = new Rectangle();
         private Models.Chess currentMovingFigure = null;
         //collection of all figures on the desk
         private List<Chess> figures;
@@ -122,7 +122,7 @@ namespace App6.Models
                     Viewes.PlayGround.Locate(rook);
                     Viewes.PlayGround.Locate(king);
                     MovingTeam = MovingTeam == Models.Chess.Team.white ? Models.Chess.Team.black : Models.Chess.Team.white;
-                    Viewes.PlayGround.MovingTeamSwitcher( MovingTeam);
+                    Viewes.PlayGround.MovingTeamSwitcher( MovingTeam,whiteTeamIndicator,blackTeamIndicator);
                 }
             }
         }
@@ -154,7 +154,7 @@ namespace App6.Models
             }
         }
 
-        public void MoveHandler(object sender, RoutedEventArgs e, Chess figure, List<Models.Chess> figures)
+        public void FigurePressedHandler(object sender, RoutedEventArgs e, Chess figure, List<Models.Chess> figures)
         {
             if (currentMovingFigure == null)
             {
@@ -182,6 +182,7 @@ namespace App6.Models
                 currentMovingFigure = null;
             }
         }
+
         //Models back
         public void ChangeFocus(Models.Cell cell, bool focused = true)
         {
@@ -215,11 +216,18 @@ namespace App6.Models
         {
             ChangeFocus(cells.Find(x => x.location == GetLocation(sender)), false);
         }
-        private void ChessMove(object sender, RoutedEventArgs e)
+        private void FigurePressed(object sender, RoutedEventArgs e)
         {
-            MoveHandler(sender, e, figures.Find(x => x.position == GetLocation(sender)), figures);
+            FigurePressedHandler(sender, e, figures.Find(x => x.position == GetLocation(sender)), figures);
         }
-
+        private void FigureFocuse(object sender, RoutedEventArgs e)
+        {
+            ChangeFocus(cells.Find(x => x.location == GetLocation(sender)));
+        }
+        private void FigureDisFocuse(object sender, RoutedEventArgs e)
+        {
+            ChangeFocus(cells.Find(x => x.location == GetLocation(sender)),false);
+        }
         public void MoveFigure(Models.Chess figure, Location newLocation, List<Models.Chess> figures, ref Models.Chess.Team MovingTeam)
         {
             //if the move will produce a check for figures team move will be canceled
@@ -254,7 +262,7 @@ namespace App6.Models
                     Viewes.PlayGround.CheckMessage();
                 }
             }
-            Viewes.PlayGround.MovingTeamSwitcher(MovingTeam);
+            Viewes.PlayGround.MovingTeamSwitcher(MovingTeam,whiteTeamIndicator,blackTeamIndicator);
         }
         private bool IsATeamChecked(Models.Chess.Team team, List<Models.Chess> figures)
         {
@@ -320,21 +328,93 @@ namespace App6.Models
             }
             foreach (Chess figure in figures)
             {
-                figure.gridControlElement.PointerPressed += ChessMove;
+                figure.gridControlElement.PointerPressed += FigurePressed;
+                figure.gridControlElement.PointerEntered += FigureFocuse;
+                figure.gridControlElement.PointerExited += FigureDisFocuse;
             }
         }
         // all processes which must be done during grid initialization
-        public void FakeInitializeGrid()
+        public void HomePageInitializer()
         {
-            //making a playground Grid           
+            //making a playground Grid            
             InitialeGrid();
+            ControlsInitializer();
+        }
+        public void ControlsInitializer()
+        {
+            FontFamily gameFont = new FontFamily("Tempus Sans ITC");
+            ImageBrush backGround = new ImageBrush();
+            backGround.ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/121212.jpg"));
+            mainWindow.Background = backGround;
+            //buttons
             Button firstButton = new Button();
             firstButton.BorderThickness = new Thickness(3);
             firstButton.Content = "new game";
+            firstButton.FontFamily = gameFont;
+            firstButton.FontSize = 22;
+            firstButton.Foreground = new SolidColorBrush(Colors.White); 
             firstButton.Height = 50;
-            firstButton.Width = 100;
+            firstButton.Width = 150;
             firstButton.Click += InitializeHandler;
-            mainWindow.Children.Add(firstButton);
+         
+            //rectangles
+            Image whiteBoard = new Image();
+            Image blackBoard = new Image();
+            var a = new BitmapImage(new Uri("ms-appx:///Assets/wooden_board.png"));
+            whiteBoard.Source = a;
+            blackBoard.Source = a;
+            panel.HorizontalAlignment = HorizontalAlignment.Right;
+            panel.VerticalAlignment = VerticalAlignment.Center;
+            whiteTeamIndicator.VerticalAlignment = VerticalAlignment.Top;
+            blackTeamIndicator.VerticalAlignment = VerticalAlignment.Bottom;
+            whiteTeamIndicator.Height = playGround.Height / 2;
+            blackTeamIndicator.Height = playGround.Height / 2;
+            blackTeamIndicator.Width = 200;
+            whiteTeamIndicator.Width = 200;
+            whiteTeamIndicator.StrokeThickness = 5;
+            blackTeamIndicator.StrokeThickness = 5;
+            whiteText.Text = "White Team";
+            blackText.Text = "Black Team";
+            whiteText.FontFamily = gameFont;
+            blackText.FontFamily = gameFont;
+            whiteText.FontSize = 20;
+            blackText.FontSize = 20;
+            whiteText.Foreground = new SolidColorBrush(Colors.White);
+            blackText.Foreground = new SolidColorBrush(Colors.White);
+
+            RelativePanel.SetAlignHorizontalCenterWith(whiteBoard, whiteTeamIndicator);
+            RelativePanel.SetAlignTopWith(whiteBoard, whiteTeamIndicator);
+            RelativePanel.SetAlignBottomWith(whiteText, whiteBoard);
+            RelativePanel.SetAlignHorizontalCenterWith(whiteText, whiteBoard);
+            RelativePanel.SetRightOf(whiteTeamIndicator, this.playGround);
+            RelativePanel.SetAlignBottomWith( blackTeamIndicator, whiteTeamIndicator);
+            whiteBoard.MaxHeight = this.playGround.Height / 2;
+            whiteBoard.MaxWidth = whiteTeamIndicator.Width - whiteTeamIndicator.StrokeThickness *2;
+
+            RelativePanel.SetRightOf(blackTeamIndicator, this.playGround);
+            RelativePanel.SetAlignBottomWith(blackTeamIndicator, this.playGround);
+            //RelativePanel.cent
+            RelativePanel.SetAlignHorizontalCenterWith(blackBoard, blackTeamIndicator);
+            RelativePanel.SetAlignTopWith(blackBoard, blackTeamIndicator);
+            RelativePanel.SetAlignBottomWith(blackText, blackBoard);
+            RelativePanel.SetAlignHorizontalCenterWith(blackText, blackBoard);
+            blackBoard.MaxWidth = blackTeamIndicator.Width - blackTeamIndicator.StrokeThickness * 2; 
+
+            RelativePanel.SetRightOf(this.playGround,firstButton);
+            RelativePanel.SetAlignVerticalCenterWithPanel(firstButton,true);
+            panel.HorizontalAlignment = HorizontalAlignment.Center;
+            panel.VerticalAlignment = VerticalAlignment.Center;
+            panel.Height = playGround.Height;
+            panel.Children.Add(playGround);
+            panel.Children.Add(blackTeamIndicator);
+            panel.Children.Add(whiteTeamIndicator);
+            panel.Children.Add(whiteBoard);
+            panel.Children.Add(blackBoard);
+            panel.Children.Add(whiteText);
+            panel.Children.Add(blackText);
+            panel.Children.Add(firstButton);
+            this.mainWindow.Children.Add(panel);
+            //adding playground grid to the mainwindow
         }
         public void InitializeHandler(object sender, RoutedEventArgs e)
         {
@@ -346,32 +426,7 @@ namespace App6.Models
         public void InitialeGrid()
         {
             playGround.Height = 640;
-            playGround.Width = 640;
-            panel.HorizontalAlignment = HorizontalAlignment.Right;
-            panel.VerticalAlignment = VerticalAlignment.Center;
-            WhiteTeamIndicator.VerticalAlignment = VerticalAlignment.Top;
-            blackTeamIndicator.VerticalAlignment = VerticalAlignment.Bottom;
-            WhiteTeamIndicator.Height = playGround.Height / 2;
-            blackTeamIndicator.Height = playGround.Height / 2;
-            blackTeamIndicator.Width = 100;
-            WhiteTeamIndicator.Width = 100;
-            whiteText.Text = "White Team";
-            blackText.Text = "Black Team";
-            whiteText.VerticalAlignment = VerticalAlignment.Top;
-            blackText.VerticalAlignment = VerticalAlignment.Bottom;
-            RelativePanel.SetAlignTopWith(whiteText, WhiteTeamIndicator);
-            RelativePanel.SetAlignHorizontalCenterWith(whiteText, WhiteTeamIndicator);
-            RelativePanel.SetAlignTopWith(blackText, blackTeamIndicator);
-            RelativePanel.SetAlignHorizontalCenterWith(blackText, blackTeamIndicator);
-            panel.Height = playGround.Height;
-            RelativePanel.SetAlignBottomWithPanel(blackTeamIndicator, true);
-            panel.Children.Add(blackTeamIndicator);
-            panel.Children.Add(WhiteTeamIndicator);
-            panel.Children.Add(whiteText);
-            panel.Children.Add(blackText);
-            this.mainWindow.Children.Add(panel);
-            //adding playground grid to the mainwindow
-            this.mainWindow.Children.Add(playGround);
+            playGround.Width = 640;          
             //a cycle which adds white and black cells to the playground,making it a chess desk
             for (int i = 0; i < 8; i++)
             {
@@ -410,7 +465,7 @@ namespace App6.Models
         public void InitializeFigures()
         {
             MovingTeam = Chess.Team.white;
-            Viewes.PlayGround.MovingTeamSwitcher(MovingTeam);
+            Viewes.PlayGround.MovingTeamSwitcher(MovingTeam, whiteTeamIndicator, blackTeamIndicator);
             // adding all figures to the desk
             for (int i = 0; i < 8; i++)
             {

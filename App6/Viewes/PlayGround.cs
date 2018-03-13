@@ -33,10 +33,10 @@ namespace App6.Viewes
             Windows.UI.Popups.MessageDialog teamChecked = new Windows.UI.Popups.MessageDialog("Ops,you`re checked :(");
             teamChecked.ShowAsync();
         }
-        public static void MovingTeamSwitcher(App6.Models.Chess.Team team)
+        public static void MovingTeamSwitcher(App6.Models.Chess.Team team,Rectangle whiteTeamIndicator, Rectangle blackTeamIndicator)
         {
-            Models.PlayGround.WhiteTeamIndicator.Stroke = team == Models.Chess.Team.white ? new SolidColorBrush(Colors.Black) : null;
-            Models.PlayGround.blackTeamIndicator.Stroke = team == Models.Chess.Team.black ? new SolidColorBrush(Colors.Black) : null;
+            whiteTeamIndicator.Stroke = team == Models.Chess.Team.white ? new SolidColorBrush(Colors.White) : null;
+            blackTeamIndicator.Stroke = team == Models.Chess.Team.black ? new SolidColorBrush(Colors.White) : null;
         }
         public static void Locate(Models.Chess figure)
         {

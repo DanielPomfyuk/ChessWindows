@@ -43,7 +43,7 @@ namespace ChessUnitTests.Models
                     {
                         type = App6.Models.Cell.Types.white;
                     }
-                    App6.Models.Cell rectangle = new App6.Models.Cell(type, new Location { row = i, column = j });
+                    App6.Models.Cell rectangle = new App6.Models.Cell(type, new Location { row = i, column = j },80);
                     cells.Add(rectangle);
                 }
             }
@@ -55,7 +55,7 @@ namespace ChessUnitTests.Models
                 cell.Locate(newPlayGRound);
             }
             // if it is figures` first moves and there`s nothing on their way casling should be allowed
-            playGround.Castling(Moсk_sender, Moсk_e, king, new Location() { row = 0, column = 6 }, figures, ref Moсk_MovingTeam, Moсk_TeamMoving);
+            playGround.Castling(Moсk_sender, Moсk_e, king, new Location() { row = 0, column = 6 }, figures, ref Moсk_MovingTeam);
             Assert.IsTrue(king.position == new Location() { row = 0, column = 6 } && rook.position == new Location() { row = 0, column = 5 });
             Assert.IsTrue(Moсk_TeamMoving.Text == Moсk_MovingTeam.ToString());
 

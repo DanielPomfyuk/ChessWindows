@@ -28,7 +28,7 @@ namespace App6
         {
             this.InitializeComponent();
             PlayGround a = new PlayGround(main_window);
-            a.FakeInitializeGrid();
+            a.HomePageInitializer();
         }
        
 
